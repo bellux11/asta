@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Asta Fantacalcio - Dashboard Mirko</title>
+
+<style>
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f6fa;
+    color: #2f3640;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background: #273c75;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .budget-panel {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .budget-box {
+    background: white;
+    border-radius: 8px;
+    padding: 12px;
+    flex: 1;
+    min-width: 200px;
+    border: 1px solid #dcdde1;
+  }
+
+  .budget-title {
+    font-size: 14px;
+    color: #718093;
+  }
+
+  .budget-value {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+
+  .section {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #dcdde1;
+    margin-bottom: 25px;
+  }
+
+  .section h2 {
+    margin-top: 0;
+    color: #192a56;
+  }
+
+  .role {
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #353b48;
+  }
+
+  .player {
+    padding: 8px;
+    margin: 6px 0;
+    background: #f0f0f0;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+  }
+
+  .player-name {
+    font-weight: 600;
+  }
+
+  .player-buttons button {
+    margin-left: 6px;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+
+  .btn-uscito {
+    background: #dcdde1;
+    color: #2f3640;
+  }
+
+  .btn-preso {
+    background: #44bd32;
+    color: white;
+  }
+
+  .player.out {
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+
+  .reset-btn {
+    background: #e84118;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+</style>
+
+<script>
+  let budgetTotale = 500;
+  let budgetDifesa = 125;
+  let budgetCentro = 180;
+  let budgetAttacco = 160;
+
+  let residuoTotale = 500;
+  let residuoDifesa = 125;
+  let residuoCentro = 180;
+  let residuoAttacco = 160;
+
+  function aggiornaBudget() {
+    document.getElementById("resTot").innerText = residuoTotale;
+    document.getElementById("resDif").innerText = residuoDifesa;
+    document.getElementById("resCen").innerText = residuoCentro;
+    document.getElementById("resAtt").innerText = residuoAttacco;
+  }
+
+  function segnaUscito(el) {
+    el.classList.add("out");
+  }
+
+  function segnaPreso(el, nome, reparto) {
+    let spesa = prompt("A quanti crediti hai preso " + nome + "?");
+    if (spesa !== null && !isNaN(spesa)) {
+      spesa = parseInt(spesa);
+      residuoTotale -= spesa;
+
+      if (reparto === "difesa") residuoDifesa -= spesa;
+      if (reparto === "centro") residuoCentro -= spesa;
+      if (reparto === "attacco") residuoAttacco -= spesa;
+
+      aggiornaBudget();
+      el.classList.add("out");
+    }
+  }
+
+  function resetAll() {
+    residuoTotale = budgetTotale;
+    residuoDifesa = budgetDifesa;
+    residuoCentro = budgetCentro;
+    residuoAttacco = budgetAttacco;
+
+    aggiornaBudget();
+
+    let players = document.querySelectorAll(".player");
+    players.forEach(p => p.classList.remove("out"));
+  }
+</script>
+
+</head>
+<body>
+
+<header>Asta Fantacalcio – Dashboard Mirko</header>
+
+<div class="container">
+
+  <!-- BUDGET PANEL -->
+  <div class="budget-panel">
+    <div class="budget-box">
+      <div class="budget-title">Totale Residuo</div>
+      <div class="budget-value" id="resTot">500</div>
+    </div>
+
+    <div class="budget-box">
+      <div class="budget-title">Difesa Residuo</div>
+      <div class="budget-value" id="resDif">125</div>
+    </div>
+
+    <div class="budget-box">
+      <div class="budget-title">Centrocampo Residuo</div>
+      <div class="budget-value" id="resCen">180</div>
+    </div>
+
+    <div class="budget-box">
+      <div class="budget-title">Attacco Residuo</div>
+      <div class="budget-value" id="resAtt">160</div>
+    </div>
+  </div>
+
+  <button class="reset-btn" onclick="resetAll()">RESET COMPLETO</button>
+
+  <!-- DIFESA -->
+  <div class="section">
+    <h2>Difesa</h2>
+
+    <div class="role">Top</div>
+    <div class="player" id="mancini">
+      <span class="player-name">Mancini – 29</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(mancini)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(mancini,'Mancini','difesa')">Preso</button>
+      </div>
+    </div>
+
+    <div class="player" id="rrahmani">
+      <span class="player-name">Rrahmani – 28</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(rrahmani)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(rrahmani,'Rrahmani','difesa')">Preso</button>
+      </div>
+    </div>
+
+    <div class="player" id="solet">
+      <span class="player-name">Solet – 27</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(solet)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(solet,'Solet','difesa')">Preso</button>
+      </div>
+    </div>
+
+    <!-- Qui aggiungo tutti gli altri nomi della difesa -->
+  </div>
+
+  <!-- CENTROCAMPO -->
+  <div class="section">
+    <h2>Centrocampo</h2>
+
+    <div class="player" id="chala">
+      <span class="player-name">Chalanoglu – 70</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(chala)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(chala,'Chalanoglu','centro')">Preso</button>
+      </div>
+    </div>
+
+    <!-- Aggiungo tutti gli altri nomi del centrocampo -->
+  </div>
+
+  <!-- ATTACCO -->
+  <div class="section">
+    <h2>Attacco</h2>
+
+    <div class="player" id="hojlund">
+      <span class="player-name">Hojlund – 98</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(hojlund)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(hojlund,'Hojlund','attacco')">Preso</button>
+      </div>
+    </div>
+
+    <!-- Aggiungo tutti gli altri nomi dell’attacco -->
+  </div>
+
+</div>
+
+</body>
+</html>
