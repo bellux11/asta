@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Asta Fantacalcio - Dashboard Mirko</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asta Fantacalcio - Mirko</title>
 
 <style>
   body {
@@ -16,9 +17,9 @@
   header {
     background: #273c75;
     color: white;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: bold;
   }
 
@@ -26,76 +27,95 @@
     padding: 15px;
   }
 
+  /* BUDGET PANEL */
   .budget-panel {
     display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
     flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
   }
 
   .budget-box {
     background: white;
-    border-radius: 8px;
-    padding: 12px;
+    border-radius: 12px;
+    padding: 18px;
     flex: 1;
-    min-width: 200px;
+    min-width: 220px;
     border: 1px solid #dcdde1;
+    text-align: center;
   }
 
   .budget-title {
-    font-size: 14px;
+    font-size: 16px;
     color: #718093;
   }
 
   .budget-value {
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
-    margin-top: 5px;
+    margin-top: 8px;
   }
 
+  .reset-btn {
+    background: #e84118;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  /* SECTION */
   .section {
     background: white;
-    padding: 15px;
-    border-radius: 10px;
+    padding: 18px;
+    border-radius: 12px;
     border: 1px solid #dcdde1;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   }
 
   .section h2 {
     margin-top: 0;
+    font-size: 22px;
     color: #192a56;
   }
 
   .role {
     font-weight: bold;
-    margin-top: 12px;
-    margin-bottom: 6px;
-    font-size: 15px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-size: 18px;
     color: #353b48;
   }
 
+  /* PLAYER ROW */
   .player {
-    padding: 8px;
-    margin: 6px 0;
+    padding: 14px;
+    margin: 10px 0;
     background: #f0f0f0;
-    border-radius: 6px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: 0.2s;
+    font-size: 18px;
   }
 
   .player-name {
     font-weight: 600;
+    font-size: 18px;
   }
 
   .player-buttons button {
-    margin-left: 6px;
-    padding: 4px 8px;
+    padding: 10px 14px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 16px;
+    margin-left: 10px;
   }
 
   .btn-uscito {
@@ -109,18 +129,27 @@
   }
 
   .player.out {
-    opacity: 0.4;
+    opacity: 0.35;
     text-decoration: line-through;
   }
 
-  .reset-btn {
-    background: #e84118;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
+  /* MOBILE OPTIMIZATION */
+  @media (max-width: 600px) {
+    .player {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .player-buttons {
+      margin-top: 10px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    .player-buttons button {
+      flex: 1;
+      margin-left: 0;
+      margin-right: 10px;
+    }
   }
 </style>
 
@@ -211,6 +240,7 @@
     <h2>Difesa</h2>
 
     <div class="role">Top</div>
+
     <div class="player" id="mancini">
       <span class="player-name">Mancini – 29</span>
       <div class="player-buttons">
@@ -235,7 +265,7 @@
       </div>
     </div>
 
-    <!-- Qui aggiungo tutti gli altri nomi della difesa -->
+    <!-- Qui aggiungerò tutti gli altri nomi -->
   </div>
 
   <!-- CENTROCAMPO -->
@@ -250,7 +280,7 @@
       </div>
     </div>
 
-    <!-- Aggiungo tutti gli altri nomi del centrocampo -->
+    <!-- Aggiungerò tutti gli altri nomi -->
   </div>
 
   <!-- ATTACCO -->
@@ -265,7 +295,7 @@
       </div>
     </div>
 
-    <!-- Aggiungo tutti gli altri nomi dell’attacco -->
+    <!-- Aggiungerò tutti gli altri nomi -->
   </div>
 
 </div>
