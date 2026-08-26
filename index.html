@@ -27,22 +27,52 @@
     padding: 15px;
   }
 
-  /* REPARTO HEADER */
+  /* BUDGET PANEL */
+  .budget-total {
+    background: #ffffff;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #dcdde1;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .reset-btn {
+    background: #e84118;
+    color: white;
+    padding: 16px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  /* REPARTO PANEL */
   .reparto-header {
     background: #dcdde1;
-    padding: 12px;
+    padding: 14px;
     border-radius: 10px;
     margin-bottom: 10px;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
   }
 
   .reparto-crediti {
     font-size: 22px;
     font-weight: bold;
     color: #192a56;
+  }
+
+  .reparto-content {
+    display: none;
+    margin-bottom: 20px;
   }
 
   /* PLAYER ROW */
@@ -88,18 +118,6 @@
     text-decoration: line-through;
   }
 
-  .reset-btn {
-    background: #e84118;
-    color: white;
-    padding: 16px 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    width: 100%;
-    margin-bottom: 25px;
-  }
-
   /* MOBILE OPTIMIZATION */
   @media (max-width: 600px) {
     .player {
@@ -121,7 +139,7 @@
 </style>
 
 <script>
-  let budgetTotale = 500;
+  let resTot = 500;
 
   let budgetPorta = 60;
   let budgetDifesa = 125;
@@ -134,10 +152,16 @@
   let resAttacco = 160;
 
   function aggiornaBudget() {
+    document.getElementById("resTot").innerText = resTot;
     document.getElementById("resPorta").innerText = resPorta;
     document.getElementById("resDifesa").innerText = resDifesa;
     document.getElementById("resCentro").innerText = resCentro;
     document.getElementById("resAttacco").innerText = resAttacco;
+  }
+
+  function togglePanel(id) {
+    let panel = document.getElementById(id);
+    panel.style.display = (panel.style.display === "none" || panel.style.display === "") ? "block" : "none";
   }
 
   function segnaUscito(el) {
@@ -148,6 +172,8 @@
     let spesa = prompt("A quanti crediti hai preso " + nome + "?");
     if (spesa !== null && !isNaN(spesa)) {
       spesa = parseInt(spesa);
+
+      resTot -= spesa;
 
       if (reparto === "porta") resPorta -= spesa;
       if (reparto === "difesa") resDifesa -= spesa;
@@ -160,6 +186,7 @@
   }
 
   function resetAll() {
+    resTot = 500;
     resPorta = budgetPorta;
     resDifesa = budgetDifesa;
     resCentro = budgetCentro;
@@ -179,93 +206,106 @@
 
 <div class="container">
 
+  <!-- RESIDUO TOTALE -->
+  <div class="budget-total">
+    Crediti Totali Residui: <span id="resTot">500</span>
+  </div>
+
   <button class="reset-btn" onclick="resetAll()">RESET COMPLETO</button>
 
   <!-- PORTIERI -->
-  <div class="reparto-header">
+  <div class="reparto-header" onclick="togglePanel('panelPorta')">
     <span>Portieri</span>
     <span class="reparto-crediti" id="resPorta">60</span>
   </div>
 
-  <div class="player" id="martinez">
-    <span class="player-name">Martínez</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(martinez)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(martinez,'Martínez','porta')">Preso</button>
+  <div class="reparto-content" id="panelPorta">
+    <div class="player" id="martinez">
+      <span class="player-name">Martínez</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(martinez)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(martinez,'Martínez','porta')">Preso</button>
+      </div>
     </div>
-  </div>
 
-  <div class="player" id="meret">
-    <span class="player-name">Meret</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(meret)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(meret,'Meret','porta')">Preso</button>
+    <div class="player" id="meret">
+      <span class="player-name">Meret</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(meret)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(meret,'Meret','porta')">Preso</button>
+      </div>
     </div>
-  </div>
 
-  <div class="player" id="carnesecchi">
-    <span class="player-name">Carnesecchi</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(carnesecchi)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(carnesecchi,'Carnesecchi','porta')">Preso</button>
+    <div class="player" id="carnesecchi">
+      <span class="player-name">Carnesecchi</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(carnesecchi)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(carnesecchi,'Carnesecchi','porta')">Preso</button>
+      </div>
     </div>
-  </div>
 
-  <div class="player" id="vicario">
-    <span class="player-name">Vicario</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(vicario)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(vicario,'Vicario','porta')">Preso</button>
+    <div class="player" id="vicario">
+      <span class="player-name">Vicario</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(vicario)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(vicario,'Vicario','porta')">Preso</button>
+      </div>
     </div>
   </div>
 
   <!-- DIFESA -->
-  <div class="reparto-header">
+  <div class="reparto-header" onclick="togglePanel('panelDifesa')">
     <span>Difesa</span>
     <span class="reparto-crediti" id="resDifesa">125</span>
   </div>
 
-  <div class="player" id="mancini">
-    <span class="player-name">Mancini – 29</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(mancini)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(mancini,'Mancini','difesa')">Preso</button>
+  <div class="reparto-content" id="panelDifesa">
+    <div class="player" id="mancini">
+      <span class="player-name">Mancini – 29</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(mancini)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(mancini,'Mancini','difesa')">Preso</button>
+      </div>
     </div>
+
+    <!-- Aggiungi qui tutti gli altri difensori -->
   </div>
 
-  <!-- (Qui aggiungi tutti gli altri della difesa) -->
-
   <!-- CENTROCAMPO -->
-  <div class="reparto-header">
+  <div class="reparto-header" onclick="togglePanel('panelCentro')">
     <span>Centrocampo</span>
     <span class="reparto-crediti" id="resCentro">180</span>
   </div>
 
-  <div class="player" id="chala">
-    <span class="player-name">Chalanoglu – 70</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(chala)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(chala,'Chalanoglu','centro')">Preso</button>
+  <div class="reparto-content" id="panelCentro">
+    <div class="player" id="chala">
+      <span class="player-name">Chalanoglu – 70</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(chala)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(chala,'Chalanoglu','centro')">Preso</button>
+      </div>
     </div>
+
+    <!-- Aggiungi qui tutti gli altri centrocampisti -->
   </div>
 
-  <!-- (Qui aggiungi tutti gli altri del centrocampo) -->
-
   <!-- ATTACCO -->
-  <div class="reparto-header">
+  <div class="reparto-header" onclick="togglePanel('panelAttacco')">
     <span>Attacco</span>
     <span class="reparto-crediti" id="resAttacco">160</span>
   </div>
 
-  <div class="player" id="hojlund">
-    <span class="player-name">Hojlund – 98</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(hojlund)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(hojlund,'Hojlund','attacco')">Preso</button>
+  <div class="reparto-content" id="panelAttacco">
+    <div class="player" id="hojlund">
+      <span class="player-name">Hojlund – 98</span>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito(hojlund)">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso(hojlund,'Hojlund','attacco')">Preso</button>
+      </div>
     </div>
-  </div>
 
-  <!-- (Qui aggiungi tutti gli altri dell’attacco) -->
+    <!-- Aggiungi qui tutti gli altri attaccanti -->
+  </div>
 
 </div>
 
