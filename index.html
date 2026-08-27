@@ -277,117 +277,939 @@
 
   <button class="reset-btn" onclick="resetAll()">RESET COMPLETO</button>
 
-  <!-- PORTIERI -->
-  <div class="reparto-header" id="header_porta" onclick="togglePanel('panelPorta')">
-    <span>Portieri (3)</span>
-    <span class="reparto-crediti" id="resPorta">60</span>
-  </div>
+<!-- PORTIERI -->
+<div class="reparto-header" id="header_porta" onclick="togglePanel('panelPorta')">
+  <span>Portieri (3)</span>
+  <span class="reparto-crediti" id="resPorta">60</span>
+</div>
 
-  <div class="reparto-content" id="panelPorta">
-    <div class="player" id="martinez">
-      <span class="player-name">Martínez</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(martinez)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(martinez,'Martínez','porta')">Preso</button>
-      </div>
-    </div>
+<div class="reparto-content" id="panelPorta">
 
-    <div class="player" id="meret">
-      <span class="player-name">Meret</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(meret)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(meret,'Meret','porta')">Preso</button>
-      </div>
-    </div>
-
-    <div class="player" id="carnesecchi">
-      <span class="player-name">Carnesecchi</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(carnesecchi)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(carnesecchi,'Carnesecchi','porta')">Preso</button>
-      </div>
-    </div>
-
-    <div class="player" id="vicario">
-      <span class="player-name">Vicario</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(vicario)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(vicario,'Vicario','porta')">Preso</button>
-      </div>
+  <!-- Ordinati alfabeticamente -->
+  <div class="player fascia-porta" id="carnesecchi">
+    <span class="player-name">Carnesecchi –  ?</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(carnesecchi)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(carnesecchi,'Carnesecchi','porta')">Preso</button>
     </div>
   </div>
 
-  <!-- DIFESA -->
-  <div class="reparto-header" id="header_difesa" onclick="togglePanel('panelDifesa')">
-    <span>Difesa (8)</span>
-    <span class="reparto-crediti" id="resDifesa">125</span>
+  <div class="player fascia-porta" id="martinez">
+    <span class="player-name">Martínez –  ?</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(martinez)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(martinez,'Martínez','porta')">Preso</button>
+    </div>
   </div>
 
-  <div class="reparto-content" id="panelDifesa">
-    <div class="player" id="mancini">
-      <span class="player-name">Mancini – 29</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(mancini)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(mancini,'Mancini','difesa')">Preso</button>
-      </div>
+  <div class="player fascia-porta" id="meret">
+    <span class="player-name">Meret –  ?</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(meret)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(meret,'Meret','porta')">Preso</button>
     </div>
-
-    <div class="player" id="rrahmani">
-      <span class="player-name">Rrahmani – 28</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(rrahmani)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(rrahmani,'Rrahmani','difesa')">Preso</button>
-      </div>
-    </div>
-
-    <div class="player" id="solet">
-      <span class="player-name">Solet – 27</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(solet)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(solet,'Solet','difesa')">Preso</button>
-      </div>
-    </div>
-
-    <!-- Qui puoi aggiungere tutti gli altri difensori della tua lista -->
   </div>
 
-  <!-- CENTROCAMPO -->
-  <div class="reparto-header" id="header_centro" onclick="togglePanel('panelCentro')">
-    <span>Centrocampo (8)</span>
-    <span class="reparto-crediti" id="resCentro">180</span>
-  </div>
-
-  <div class="reparto-content" id="panelCentro">
-    <div class="player" id="chala">
-      <span class="player-name">Chalanoglu – 70</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(chala)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(chala,'Chalanoglu','centro')">Preso</button>
-      </div>
+  <div class="player fascia-porta" id="vicario">
+    <span class="player-name">Vicario –  ?</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(vicario)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(vicario,'Vicario','porta')">Preso</button>
     </div>
-
-    <!-- Qui puoi aggiungere tutti gli altri centrocampisti della tua lista -->
-  </div>
-
-  <!-- ATTACCO -->
-  <div class="reparto-header" id="header_attacco" onclick="togglePanel('panelAttacco')">
-    <span>Attacco (6)</span>
-    <span class="reparto-crediti" id="resAttacco">160</span>
-  </div>
-
-  <div class="reparto-content" id="panelAttacco">
-    <div class="player" id="hojlund">
-      <span class="player-name">Hojlund – 98</span>
-      <div class="player-buttons">
-        <button class="btn-uscito" onclick="segnaUscito(hojlund)">Uscito</button>
-        <button class="btn-preso" onclick="segnaPreso(hojlund,'Hojlund','attacco')">Preso</button>
-      </div>
-    </div>
-
-    <!-- Qui puoi aggiungere tutti gli altri attaccanti della tua lista -->
   </div>
 
 </div>
 
-</body>
-</html>
+<!-- DIFESA -->
+<div class="reparto-header" id="header_difesa" onclick="togglePanel('panelDifesa')">
+  <span>Difesa (8)</span>
+  <span class="reparto-crediti" id="resDifesa">125</span>
+</div>
+
+<div class="reparto-content" id="panelDifesa">
+
+  <!-- TOP -->
+  <h3 style="color:#0057ff;">Top</h3>
+
+  <div class="player fascia-top" id="mancini">
+    <span class="player-name">Mancini – 29</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(mancini)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(mancini,'Mancini','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-top" id="rrahmani">
+    <span class="player-name">Rrahmani – 28</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(rrahmani)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(rrahmani,'Rrahmani','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-top" id="solet">
+    <span class="player-name">Solet – 27</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(solet)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(solet,'Solet','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <!-- SEMI-TOP -->
+  <h3 style="color:#7a00ff;">Semi‑Top</h3>
+
+  <div class="player fascia-semitop" id="bartesaghi">
+    <span class="player-name">Bartesaghi – 17</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(bartesaghi)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(bartesaghi,'Bartesaghi','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="kalulu">
+    <span class="player-name">Kalulu – 20</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kalulu)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kalulu,'Kalulu','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="molina">
+    <span class="player-name">Molina – 20</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(molina)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(molina,'Molina','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="ndicka">
+    <span class="player-name">Ndicka – 20</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(ndicka)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(ndicka,'Ndicka','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="ramon">
+    <span class="player-name">Ramon – 18</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(ramon)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(ramon,'Ramon','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <!-- AFFIDABILI -->
+  <h3 style="color:#00a84f;">Affidabili</h3>
+
+  <div class="player fascia-affidabile" id="bastoni">
+    <span class="player-name">Bastoni – 15</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(bastoni)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(bastoni,'Bastoni','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-affidabile" id="kempf">
+    <span class="player-name">Kempf – 15</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kempf)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kempf,'Kempf','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-affidabile" id="ostigard">
+    <span class="player-name">Ostigard – 15</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(ostigard)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(ostigard,'Ostigard','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-affidabile" id="pavlovic">
+    <span class="player-name">Pavlovic – 12</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(pavlovic)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(pavlovic,'Pavlovic','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <!-- MEDI -->
+  <h3 style="color:#c7a600;">Medi</h3>
+
+  <div class="player fascia-medi" id="gila">
+    <span class="player-name">Gila – 12</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(gila)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(gila,'Gila','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="kelly">
+    <span class="player-name">Kelly – 12</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kelly)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kelly,'Kelly','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="miranda">
+    <span class="player-name">Miranda – 11</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(miranda)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(miranda,'Miranda','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="rensch">
+    <span class="player-name">Rensch – 10</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(rensch)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(rensch,'Rensch','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="vasquez">
+    <span class="player-name">Vasquez – 12</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(vasquez)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(vasquez,'Vasquez','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <!-- SCOMMESSE -->
+  <h3 style="color:#ff7b00;">Scommesse</h3>
+
+  <div class="player fascia-scommessa" id="couto">
+    <span class="player-name">Couto – 6</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(couto)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(couto,'Couto','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="hainaut">
+    <span class="player-name">Hainaut – 6</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(hainaut)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(hainaut,'Hainaut','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="haps">
+    <span class="player-name">Haps – 6</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(haps)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(haps,'Haps','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="koulierakis">
+    <span class="player-name">Koulierakis – 8</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(koulierakis)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(koulierakis,'Koulierakis','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="valdepens">
+    <span class="player-name">Valdepens – 6</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(valdepens)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(valdepens,'Valdepens','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="vojvoda">
+    <span class="player-name">Vojvoda – 6</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(vojvoda)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(vojvoda,'Vojvoda','difesa')">Preso</button>
+    </div>
+  </div>
+
+   <!-- RISERVE -->
+  <h3 style="color:#777;">Riserve</h3>
+
+  <div class="player fascia-riserva" id="oyono">
+    <span class="player-name">A. Oyono – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(oyono)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(oyono,'A. Oyono','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="birindelli">
+    <span class="player-name">Birindelli – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(birindelli)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(birindelli,'Birindelli','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="coco">
+    <span class="player-name">Coco – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(coco)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(coco,'Coco','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="comuzzo">
+    <span class="player-name">Comuzzo – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(comuzzo)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(comuzzo,'Comuzzo','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="delprato">
+    <span class="player-name">Del Prato – 5</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(delprato)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(delprato,'Del Prato','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="idzes">
+    <span class="player-name">Idzes – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(idzes)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(idzes,'Idzes','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="kaaiki">
+    <span class="player-name">Kaaiki – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kaaiki)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kaaiki,'Kaaiki','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="kabasele">
+    <span class="player-name">Kabasele – 5</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kabasele)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kabasele,'Kabasele','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="kouadio">
+    <span class="player-name">Kouadio – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kouadio)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kouadio,'Kouadio','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="marcandalli">
+    <span class="player-name">Marcandalli – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(marcandalli)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(marcandalli,'Marcandalli','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="mina">
+    <span class="player-name">Mina – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(mina)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(mina,'Mina','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="obrador">
+    <span class="player-name">Obrador – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(obrador)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(obrador,'Obrador','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="provstgard">
+    <span class="player-name">Provstgard – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(provstgard)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(provstgard,'Provstgard','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="siebert">
+    <span class="player-name">Siebert – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(siebert)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(siebert,'Siebert','difesa')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="valeri">
+    <span class="player-name">Valeri – 3</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(valeri)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(valeri,'Valeri','difesa')">Preso</button>
+    </div>
+  </div>
+<!-- CENTROCAMPO -->
+<div class="reparto-header" id="header_centro" onclick="togglePanel('panelCentro')">
+  <span>Centrocampo (8)</span>
+  <span class="reparto-crediti" id="resCentro">180</span>
+</div>
+
+<div class="reparto-content" id="panelCentro">
+
+  <!-- TOP ASSOLUTI -->
+  <h3 style="color:#0057ff;">Top Assoluti</h3>
+
+  <div class="player fascia-topassoluto" id="chalanoglu">
+    <span class="player-name">Chalanoglu – 70</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(chalanoglu)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(chalanoglu,'Chalanoglu','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-topassoluto" id="mctommy">
+    <span class="player-name">McTommy – 60</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(mctommy)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(mctommy,'McTommy','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-topassoluto" id="orsolini">
+    <span class="player-name">Orsolini – 60</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(orsolini)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(orsolini,'Orsolini','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-topassoluto" id="paz">
+    <span class="player-name">Paz – 82</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(paz)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(paz,'Paz','centro')">Preso</button>
+    </div>
+  </div>
+
+  <!-- TOP -->
+  <h3 style="color:#7a00ff;">Top</h3>
+
+  <div class="player fascia-top" id="baturina">
+    <span class="player-name">Baturina – 40</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(baturina)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(baturina,'Baturina','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-top" id="dacunha">
+    <span class="player-name">Da Cunha – 40</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(dacunha)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(dacunha,'Da Cunha','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-top" id="mastantuono">
+    <span class="player-name">Mastantuono – 40</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(mastantuono)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(mastantuono,'Mastantuono','centro')">Preso</button>
+    </div>
+  </div>
+
+  <!-- SEMI-TOP -->
+  <h3 style="color:#00a84f;">Semi‑Top</h3>
+
+  <div class="player fascia-semitop" id="atta">
+    <span class="player-name">Atta – 35</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(atta)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(atta,'Atta','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="barella">
+    <span class="player-name">Barella – 30</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(barella)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(barella,'Barella','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="conceicao">
+    <span class="player-name">Conceicao – 25</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(conceicao)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(conceicao,'Conceicao','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="jrodriguez">
+    <span class="player-name">J. Rodriguez – 24</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(jrodriguez)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(jrodriguez,'J. Rodriguez','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="rabiot">
+    <span class="player-name">Rabiot – 26</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(rabiot)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(rabiot,'Rabiot','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="rowe">
+    <span class="player-name">Rowe – 30</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(rowe)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(rowe,'Rowe','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-semitop" id="vlasic">
+    <span class="player-name">Vlasic – 26</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(vlasic)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(vlasic,'Vlasic','centro')">Preso</button>
+    </div>
+  </div>
+
+  <!-- TITOLARI FORTI -->
+  <h3 style="color:#ff7b00;">Titolari Forti</h3>
+
+  <div class="player fascia-forte" id="diouf">
+    <span class="player-name">Diouf – 19</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(diouf)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(diouf,'Diouf','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-forte" id="ekkelenkamp">
+    <span class="player-name">Ekkelenkamp – 18</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(ekkelenkamp)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(ekkelenkamp,'Ekkelenkamp','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-forte" id="saelemaekers">
+    <span class="player-name">Saelemaekers – 18</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(saelemaekers)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(saelemaekers,'Saelemaekers','centro')">Preso</button>
+    </div>
+  </div>
+
+  <!-- TITOLARI MEDI -->
+  <h3 style="color:#c7a600;">Titolari Medi</h3>
+
+  <div class="player fascia-medi" id="calo">
+    <span class="player-name">Calò – 12</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(calo)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(calo,'Calò','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="fazzini">
+    <span class="player-name">Fazzini – 10</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(fazzini)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(fazzini,'Fazzini','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="frattesi">
+    <span class="player-name">Frattesi – 10</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(frattesi)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(frattesi,'Frattesi','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="pavlovic_c">
+    <span class="player-name">Pavlovic – 12</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(pavlovic_c)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(pavlovic_c,'Pavlovic','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="perrone">
+    <span class="player-name">Perrone – 13</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(perrone)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(perrone,'Perrone','centro')">Preso</button>
+    </div>
+  </div>
+
+  <!-- SCOMMESSE -->
+  <h3 style="color:#d12b00;">Scommesse</h3>
+
+  <div class="player fascia-scommessa" id="adzin">
+    <span class="player-name">Adzin – 3</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(adzin)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(adzin,'Adzin','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="cacciamani">
+    <span class="player-name">Cacciamani – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(cacciamani)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(cacciamani,'Cacciamani','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="cisse">
+    <span class="player-name">Cisse – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(cisse)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(cisse,'Cisse','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="coulibaly">
+    <span class="player-name">Coulibaly – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(coulibaly)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(coulibaly,'Coulibaly','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="kulenovic_c">
+    <span class="player-name">Kulenovic – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kulenovic_c)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kulenovic_c,'Kulenovic','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="romano">
+    <span class="player-name">Romano – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(romano)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(romano,'Romano','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="zerbin_c">
+    <span class="player-name">Zerbin – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(zerbin_c)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(zerbin_c,'Zerbin','centro')">Preso</button>
+    </div>
+  </div>
+
+  <!-- RISERVE -->
+  <h3 style="color:#777;">Riserve</h3>
+
+  <div class="player fascia-riserva" id="bakola">
+    <span class="player-name">Bakola – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(bakola)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(bakola,'Bakola','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="frendrup">
+    <span class="player-name">Frendrup – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(frendrup)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(frendrup,'Frendrup','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="gaetano">
+    <span class="player-name">Gaetano – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(gaetano)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(gaetano,'Gaetano','centro')">Preso</button>
+    </div>
+  </div>
+
+    <div class="player fascia-riserva" id="karlstrom">
+    <span class="player-name">Karlstrom – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(karlstrom)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(karlstrom,'Karlstrom','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="oulai">
+    <span class="player-name">Oulai – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(oulai)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(oulai,'Oulai','centro')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="bakola">
+    <span class="player-name">Bakola – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(bakola)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(bakola,'Bakola','centro')">Preso</button>
+    </div>
+  </div>
+<!-- ATTACCO -->
+<div class="reparto-header" id="header_attacco" onclick="togglePanel('panelAttacco')">
+  <span>Attacco (6)</span>
+  <span class="reparto-crediti" id="resAttacco">160</span>
+</div>
+
+<div class="reparto-content" id="panelAttacco">
+
+  <!-- TOP -->
+  <h3 style="color:#0057ff;">Top</h3>
+
+  <div class="player fascia-top" id="douvikas">
+    <span class="player-name">Douvikas – 100</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(douvikas)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(douvikas,'Douvikas','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-top" id="hojlund">
+    <span class="player-name">Hojlund – 98</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(hojlund)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(hojlund,'Hojlund','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-top" id="kristovic">
+    <span class="player-name">Kristovic – 50</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kristovic)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kristovic,'Kristovic','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-top" id="simeone">
+    <span class="player-name">Simeone – 65</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(simeone)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(simeone,'Simeone','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <!-- TITOLARI FORTI -->
+  <h3 style="color:#7a00ff;">Titolari Forti</h3>
+
+  <div class="player fascia-forte" id="asantos">
+    <span class="player-name">A. Santos – 40</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(asantos)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(asantos,'A. Santos','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-forte" id="castro">
+    <span class="player-name">Castro – 25</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(castro)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(castro,'Castro','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-forte" id="colombo">
+    <span class="player-name">Colombo – 30</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(colombo)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(colombo,'Colombo','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-forte" id="esposito">
+    <span class="player-name">Esposito – 30</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(esposito)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(esposito,'Esposito','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-forte" id="lauriente">
+    <span class="player-name">Laurienté – 30</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(lauriente)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(lauriente,'Laurienté','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-forte" id="neres">
+    <span class="player-name">Neres – 30</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(neres)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(neres,'Neres','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-forte" id="pellegrino">
+    <span class="player-name">Pellegrino – 35</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(pellegrino)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(pellegrino,'Pellegrino','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <!-- TITOLARI MEDI -->
+  <h3 style="color:#00a84f;">Titolari Medi</h3>
+
+  <div class="player fascia-medi" id="adams">
+    <span class="player-name">Adams – 20</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(adams)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(adams,'Adams','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-medi" id="pinamonti">
+    <span class="player-name">Pinamonti – 12</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(pinamonti)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(pinamonti,'Pinamonti','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <!-- SCOMMESSE -->
+  <h3 style="color:#ff7b00;">Scommesse</h3>
+
+  <div class="player fascia-scommessa" id="ghedjemis">
+    <span class="player-name">Ghedjemis – 10</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(ghedjemis)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(ghedjemis,'Ghedjemis','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="maldini">
+    <span class="player-name">Maldini – 8</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(maldini)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(maldini,'Maldini','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-scommessa" id="yeboah">
+    <span class="player-name">Yeboah – 10</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(yeboah)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(yeboah,'Yeboah','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <!-- RISERVE -->
+  <h3 style="color:#777;">Riserve</h3>
+
+  <div class="player fascia-riserva" id="adzin_a">
+    <span class="player-name">Adzin – 3</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(adzin_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(adzin_a,'Adzin','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="bakola_a">
+    <span class="player-name">Bakola – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(bakola_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(bakola_a,'Bakola','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="cacciamani_a">
+    <span class="player-name">Cacciamani – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(cacciamani_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(cacciamani_a,'Cacciamani','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="cheadams">
+    <span class="player-name">Che Adams – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(cheadams)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(cheadams,'Che Adams','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="cisse_a">
+    <span class="player-name">Cisse – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(cisse_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(cisse_a,'Cisse','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="coulibaly_a">
+    <span class="player-name">Coulibaly – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(coulibaly_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(coulibaly_a,'Coulibaly','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="frendrup_a">
+    <span class="player-name">Frendrup – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(frendrup_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(frendrup_a,'Frendrup','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="gaetano_a">
+    <span class="player-name">Gaetano – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(gaetano_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(gaetano_a,'Gaetano','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="karlstrom_a">
+    <span class="player-name">Karlstrom – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(karlstrom_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(karlstrom_a,'Karlstrom','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="kulenovic_a">
+    <span class="player-name">Kulenovic – 1</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(kulenovic_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(kulenovic_a,'Kulenovic','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="oulai_a">
+    <span class="player-name">Oulai – 2</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(oulai_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(oulai_a,'Oulai','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="romano_a">
+    <span class="player-name">Romano – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(romano_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(romano_a,'Romano','attacco')">Preso</button>
+    </div>
+  </div>
+
+  <div class="player fascia-riserva" id="zerbin_a">
+    <span class="player-name">Zerbin – 4</span>
+    <div class="player-buttons">
+      <button class="btn-uscito" onclick="segnaUscito(zerbin_a)">Uscito</button>
+      <button class="btn-preso" onclick="segnaPreso(zerbin_a,'Zerbin','attacco')">Preso</button>
+    </div>
+  </div>
+
+</div>
