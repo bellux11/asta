@@ -137,6 +137,93 @@
       margin-right: 10px;
     }
   }
+
+  /* ===== MIGLIORIE ASTA LIVE ===== */
+  .search-box {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 15px;
+    margin: 0 0 14px 0;
+    border: 2px solid #dcdde1;
+    border-radius: 10px;
+    font-size: 18px;
+    background: #fff;
+    color: #2f3640;
+    outline: none;
+  }
+  .search-box:focus {
+    border-color: #273c75;
+    box-shadow: 0 0 0 3px rgba(39,60,117,.10);
+  }
+  .player.exited { opacity: .55; }
+  .player.exited .btn-preso { display: none; }
+  .player.purchased {
+    opacity: 1;
+    background: #f3fff1;
+    border: 2px solid #44bd32;
+  }
+  .player.purchased .btn-uscito,
+  .player.purchased .btn-preso { display: none; }
+
+  .btn-ripristina,
+  .btn-annulla-acquisto {
+    background: #718093;
+    color: white;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-left: 10px;
+  }
+  .btn-ripristina:hover,
+  .btn-annulla-acquisto:hover { background: #596275; }
+
+  .prezzo-pagato {
+    display: inline-block;
+    margin-left: 8px;
+    color: #218c2b;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .stato-uscito {
+    display: inline-block;
+    margin-left: 8px;
+    color: #718093;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+  .asta-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: #2f3640;
+    color: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 6px 25px rgba(0,0,0,.20);
+    font-weight: 700;
+    display: none;
+  }
+  .asta-toast.show { display: block; }
+
+  @media (max-width: 600px) {
+    .search-box { font-size: 18px; padding: 14px; }
+    .btn-ripristina,
+    .btn-annulla-acquisto {
+      margin-left: 0;
+      flex: 1;
+    }
+    .prezzo-pagato {
+      display: block;
+      margin-left: 0;
+      margin-top: 4px;
+    }
+  }
+
 </style>
 
 <script>
@@ -179,63 +266,350 @@
   }
 
   function togglePanel(id) {
-    let panel = document.getElementById(id);
-    panel.style.display = (panel.style.display === "none" || panel.style.display === "") ? "block" : "none";
+    const panel = document.getElementById(id);
+    panel.style.display =
+      (panel.style.display === "none" || panel.style.display === "")
+        ? "block"
+        : "none";
+  }
+
+  function mostraToast(testo) {
+    let toast = document.getElementById("astaToast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "astaToast";
+      toast.className = "asta-toast";
+      document.body.appendChild(toast);
+    }
+    toast.innerText = testo;
+    toast.classList.add("show");
+    clearTimeout(window._astaToastTimer);
+    window._astaToastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
+  }
+
+  function filtraGiocatori(input) {
+    const testo = input.value
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .trim();
+
+    const panel = input.closest(".reparto-content");
+    if (!panel) return;
+
+    panel.querySelectorAll(".player").forEach(player => {
+      const nome = player.querySelector(".player-name").innerText
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+      player.style.display = (!testo || nome.includes(testo)) ? "" : "none";
+    });
+
+    panel.querySelectorAll("h3").forEach(heading => {
+      let next = heading.nextElementSibling;
+      let haGiocatori = false;
+
+      while (next && next.tagName !== "H3") {
+        if (
+          next.classList &&
+          next.classList.contains("player") &&
+          next.style.display !== "none"
+        ) {
+          haGiocatori = true;
+          break;
+        }
+        next = next.nextElementSibling;
+      }
+
+      heading.style.display = (!testo || haGiocatori) ? "" : "none";
+    });
+  }
+
+  /*
+   * Ricostruisce i crediti partendo dagli acquisti presenti nella pagina.
+   * Serve soprattutto per poter annullare un acquisto anche dopo il
+   * completamento di un reparto e il relativo trasferimento di residuo.
+   */
+  function ricalcolaBudget() {
+    const nuoviRes = {
+      porta: previsto.porta,
+      difesa: previsto.difesa,
+      centro: previsto.centro,
+      attacco: previsto.attacco
+    };
+
+    const nuoviPresi = {
+      porta: 0,
+      difesa: 0,
+      centro: 0,
+      attacco: 0
+    };
+
+    const ordine = ["porta", "difesa", "centro", "attacco"];
+    const pannelli = {
+      porta: "panelPorta",
+      difesa: "panelDifesa",
+      centro: "panelCentro",
+      attacco: "panelAttacco"
+    };
+
+    let totaleSpeso = 0;
+
+    ordine.forEach(reparto => {
+      const panel = document.getElementById(pannelli[reparto]);
+      let spesoReparto = 0;
+
+      if (panel) {
+        panel.querySelectorAll(".player.purchased").forEach(player => {
+          const prezzo = parseInt(player.dataset.prezzoPagato, 10) || 0;
+          spesoReparto += prezzo;
+          nuoviPresi[reparto]++;
+          totaleSpeso += prezzo;
+        });
+      }
+
+      nuoviRes[reparto] -= spesoReparto;
+
+      if (nuoviPresi[reparto] === maxGiocatori[reparto]) {
+        if (reparto === "porta") nuoviRes.difesa += nuoviRes[reparto];
+        else if (reparto === "difesa") nuoviRes.centro += nuoviRes[reparto];
+        else if (reparto === "centro") nuoviRes.attacco += nuoviRes[reparto];
+
+        nuoviRes[reparto] = 0;
+      }
+    });
+
+    res = nuoviRes;
+    presi = nuoviPresi;
+    resTot = 500 - totaleSpeso;
+
+    ordine.forEach(reparto => {
+      const header = document.getElementById("header_" + reparto);
+      if (header) {
+        header.classList.toggle(
+          "completato",
+          presi[reparto] === maxGiocatori[reparto]
+        );
+      }
+    });
+
+    aggiornaBudget();
   }
 
   function completaReparto(reparto) {
-    let header = document.getElementById("header_" + reparto);
-    header.classList.add("completato");
-
-    let speso = previsto[reparto] - res[reparto];
-    let residuo = previsto[reparto] - speso;
-
-    if (reparto === "porta") res.difesa += residuo;
-    else if (reparto === "difesa") res.centro += residuo;
-    else if (reparto === "centro") res.attacco += residuo;
-
-    res[reparto] = 0;
-    aggiornaBudget();
+    ricalcolaBudget();
   }
 
   function segnaUscito(el) {
-    el.classList.add("out");
+    if (el.classList.contains("purchased")) return;
+
+    el.classList.remove("out");
+    el.classList.add("exited");
+
+    const buttons = el.querySelector(".player-buttons");
+
+    if (buttons && !buttons.querySelector(".btn-ripristina")) {
+      const btn = document.createElement("button");
+      btn.className = "btn-ripristina";
+      btn.innerText = "↩ Ripristina";
+      btn.onclick = function(event) {
+        event.stopPropagation();
+        ripristinaUscito(el);
+      };
+      buttons.appendChild(btn);
+    }
+
+    const nomeEl = el.querySelector(".player-name");
+    if (nomeEl && !nomeEl.querySelector(".stato-uscito")) {
+      const stato = document.createElement("span");
+      stato.className = "stato-uscito";
+      stato.innerText = "Uscito";
+      nomeEl.appendChild(stato);
+    }
+
+    mostraToast("Giocatore segnato come uscito");
+  }
+
+  function ripristinaUscito(el) {
+    if (el.classList.contains("purchased")) return;
+
+    el.classList.remove("exited", "out");
+
+    const btn = el.querySelector(".btn-ripristina");
+    if (btn) btn.remove();
+
+    const stato = el.querySelector(".stato-uscito");
+    if (stato) stato.remove();
+
+    mostraToast("Giocatore ripristinato");
   }
 
   function segnaPreso(el, nome, reparto) {
+    if (el.classList.contains("purchased")) return;
+
     let spesa = prompt("A quanti crediti hai preso " + nome + "?");
-    if (spesa !== null && !isNaN(spesa)) {
-      spesa = parseInt(spesa);
-      resTot -= spesa;
-      res[reparto] -= spesa;
-      presi[reparto]++;
+    if (spesa === null) return;
 
-      if (presi[reparto] === maxGiocatori[reparto]) completaReparto(reparto);
-      else aggiornaBudget();
+    spesa = spesa.trim();
 
-      el.classList.add("out");
+    if (spesa === "" || !/^\d+$/.test(spesa)) {
+      alert("Inserisci un numero intero di crediti valido.");
+      return;
     }
+
+    spesa = parseInt(spesa, 10);
+
+    const nomeEl = el.querySelector(".player-name");
+
+    if (!el.dataset.nomeOriginale) {
+      el.dataset.nomeOriginale = nomeEl.innerText;
+    }
+
+    nomeEl.innerHTML = "";
+
+    const nomeSpan = document.createElement("span");
+    nomeSpan.innerText = nome;
+
+    const prezzoSpan = document.createElement("span");
+    prezzoSpan.className = "prezzo-pagato";
+    prezzoSpan.innerText = "– " + spesa + " cr.";
+
+    nomeEl.appendChild(nomeSpan);
+    nomeEl.appendChild(prezzoSpan);
+
+    el.dataset.prezzoPagato = spesa;
+    el.dataset.reparto = reparto;
+
+    el.classList.remove("exited", "out");
+
+    const stato = el.querySelector(".stato-uscito");
+    if (stato) stato.remove();
+
+    const btnRipristina = el.querySelector(".btn-ripristina");
+    if (btnRipristina) btnRipristina.remove();
+
+    el.classList.add("purchased", "out");
+
+    const buttons = el.querySelector(".player-buttons");
+
+    if (buttons && !buttons.querySelector(".btn-annulla-acquisto")) {
+      const btnAnnulla = document.createElement("button");
+      btnAnnulla.className = "btn-annulla-acquisto";
+      btnAnnulla.innerText = "↩ Annulla acquisto";
+      btnAnnulla.onclick = function(event) {
+        event.stopPropagation();
+        annullaAcquisto(el);
+      };
+      buttons.appendChild(btnAnnulla);
+    }
+
+    ricalcolaBudget();
+    mostraToast(nome + " acquistato a " + spesa + " crediti");
   }
 
+  function annullaAcquisto(el) {
+    if (!el.classList.contains("purchased")) return;
+
+    const prezzo = el.dataset.prezzoPagato || "0";
+    const nomeOriginale = el.dataset.nomeOriginale || "Giocatore";
+
+    if (!confirm(
+      "Annullare l'acquisto di " + nomeOriginale.split(" – ")[0] +
+      " pagato " + prezzo + " crediti?"
+    )) {
+      return;
+    }
+
+    const nomeEl = el.querySelector(".player-name");
+    if (nomeEl) nomeEl.innerText = nomeOriginale;
+
+    delete el.dataset.prezzoPagato;
+    delete el.dataset.nomeOriginale;
+    delete el.dataset.reparto;
+
+    el.classList.remove("purchased", "out");
+
+    const btn = el.querySelector(".btn-annulla-acquisto");
+    if (btn) btn.remove();
+
+    ricalcolaBudget();
+    mostraToast("Acquisto annullato: puoi reinserire il prezzo");
+  }
+
+  /*
+   * Il reset resta disponibile ma richiede DUE conferme separate.
+   */
   function resetAll() {
+    if (!confirm(
+      "ATTENZIONE!\n\n" +
+      "Stai per azzerare TUTTA l'asta.\n" +
+      "Acquisti, uscite e crediti verranno ripristinati.\n\n" +
+      "Vuoi continuare?"
+    )) return;
+
+    if (!confirm(
+      "ULTIMA CONFERMA!\n\n" +
+      "Questa operazione NON può essere annullata.\n\n" +
+      "AZZERARE DAVVERO TUTTO?"
+    )) return;
+
     resTot = 500;
-    res.porta = previsto.porta;
-    res.difesa = previsto.difesa;
-    res.centro = previsto.centro;
-    res.attacco = previsto.attacco;
 
-    presi.porta = 0;
-    presi.difesa = 0;
-    presi.centro = 0;
-    presi.attacco = 0;
+    res = {
+      porta: previsto.porta,
+      difesa: previsto.difesa,
+      centro: previsto.centro,
+      attacco: previsto.attacco
+    };
 
-    document.querySelectorAll(".reparto-header").forEach(h => h.classList.remove("completato"));
-    document.querySelectorAll(".player").forEach(p => p.classList.remove("out"));
+    presi = {
+      porta: 0,
+      difesa: 0,
+      centro: 0,
+      attacco: 0
+    };
+
+    document.querySelectorAll(".reparto-header").forEach(header => {
+      header.classList.remove("completato");
+    });
+
+    document.querySelectorAll(".player").forEach(player => {
+      const nomeEl = player.querySelector(".player-name");
+
+      if (player.dataset.nomeOriginale && nomeEl) {
+        nomeEl.innerText = player.dataset.nomeOriginale;
+      }
+
+      player.classList.remove("out", "exited", "purchased");
+
+      delete player.dataset.prezzoPagato;
+      delete player.dataset.nomeOriginale;
+      delete player.dataset.reparto;
+
+      const stato = player.querySelector(".stato-uscito");
+      if (stato) stato.remove();
+
+      const btnRipristina = player.querySelector(".btn-ripristina");
+      if (btnRipristina) btnRipristina.remove();
+
+      const btnAnnulla = player.querySelector(".btn-annulla-acquisto");
+      if (btnAnnulla) btnAnnulla.remove();
+    });
+
+    document.querySelectorAll(".search-box").forEach(input => {
+      input.value = "";
+      filtraGiocatori(input);
+    });
 
     aggiornaBudget();
+    mostraToast("Asta completamente azzerata");
   }
 
-  window.onload = aggiornaBudget;
+  window.onload = function() {
+    aggiornaBudget();
+    document.querySelectorAll(".search-box").forEach(filtraGiocatori);
+  };
 </script>
 
 </head>
@@ -257,6 +631,7 @@
 </div>
 
 <div class="reparto-content" id="panelPorta">
+  <input type="search" class="search-box" placeholder="🔎 Cerca portiere..." oninput="filtraGiocatori(this)" autocomplete="off">
 
   <div class="player fascia-porta" id="carnesecchi">
     <span class="player-name">Carnesecchi – ?</span>
@@ -298,6 +673,7 @@
 </div>
 
 <div class="reparto-content" id="panelDifesa">
+  <input type="search" class="search-box" placeholder="🔎 Cerca difensore..." oninput="filtraGiocatori(this)" autocomplete="off">
 
   <!-- TOP -->
   <h3 style="color:#0057ff;">Top</h3>
@@ -630,6 +1006,7 @@
 </div>
 
 <div class="reparto-content" id="panelCentro">
+  <input type="search" class="search-box" placeholder="🔎 Cerca centrocampista..." oninput="filtraGiocatori(this)" autocomplete="off">
 
   <!-- TOP ASSOLUTI -->
   <h3 style="color:#0057ff;">Top Assoluti</h3>
@@ -933,6 +1310,7 @@
 </div>
 
 <div class="reparto-content" id="panelAttacco">
+  <input type="search" class="search-box" placeholder="🔎 Cerca attaccante..." oninput="filtraGiocatori(this)" autocomplete="off">
 
   <!-- TOP -->
   <h3 style="color:#0057ff;">Top</h3>
