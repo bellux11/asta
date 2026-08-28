@@ -3,1564 +3,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asta Fantacalcio - Mirko</title>
-
+<title>Asta Fantacalcio 2026/27 — Strategia</title>
 <style>
-  body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f5f6fa;
-    color: #2f3640;
-    margin: 0;
-    padding: 0;
-  }
-
-  header {
-    background: #273c75;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-size: 26px;
-    font-weight: bold;
-  }
-
-  .container {
-    padding: 15px;
-  }
-
-  .budget-total {
-    background: #ffffff;
-    padding: 18px;
-    border-radius: 12px;
-    border: 1px solid #dcdde1;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .reset-btn {
-    background: #e84118;
-    color: white;
-    padding: 16px 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    width: 100%;
-    margin-bottom: 25px;
-  }
-
-  .reparto-header {
-    background: #dcdde1;
-    padding: 14px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .reparto-header.completato {
-    background: #44bd32;
-    color: white;
-  }
-
-  .reparto-crediti {
-    font-size: 22px;
-    font-weight: bold;
-    color: #192a56;
-  }
-
-  .reparto-content {
-    display: none;
-    margin-bottom: 20px;
-  }
-
-  .player {
-    padding: 14px;
-    margin: 10px 0;
-    background: #ffffff;
-    border-radius: 10px;
-    border: 1px solid #dcdde1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: 0.2s;
-    font-size: 18px;
-  }
-
-  .player-name {
-    font-weight: 600;
-    font-size: 18px;
-  }
-
-  .player-buttons button {
-    padding: 12px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    margin-left: 10px;
-  }
-
-  .btn-uscito {
-    background: #dcdde1;
-    color: #2f3640;
-  }
-
-  .btn-preso {
-    background: #44bd32;
-    color: white;
-  }
-
-  .player.out {
-    opacity: 0.35;
-    text-decoration: line-through;
-  }
-
-  @media (max-width: 600px) {
-    .player {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .player-buttons {
-      margin-top: 10px;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-    }
-    .player-buttons button {
-      flex: 1;
-      margin-left: 0;
-      margin-right: 10px;
-    }
-  }
-
-  /* ===== MIGLIORIE ASTA LIVE ===== */
-  .search-box {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 13px 15px;
-    margin: 0 0 14px 0;
-    border: 2px solid #dcdde1;
-    border-radius: 10px;
-    font-size: 18px;
-    background: #fff;
-    color: #2f3640;
-    outline: none;
-  }
-  .search-box:focus {
-    border-color: #273c75;
-    box-shadow: 0 0 0 3px rgba(39,60,117,.10);
-  }
-  .player.exited { opacity: .55; }
-  .player.exited .btn-preso { display: none; }
-  .player.purchased {
-    opacity: 1;
-    background: #f3fff1;
-    border: 2px solid #44bd32;
-  }
-  .player.purchased .btn-uscito,
-  .player.purchased .btn-preso { display: none; }
-
-  .btn-ripristina,
-  .btn-annulla-acquisto {
-    background: #718093;
-    color: white;
-    padding: 12px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 18px;
-    margin-left: 10px;
-  }
-  .btn-ripristina:hover,
-  .btn-annulla-acquisto:hover { background: #596275; }
-
-  .prezzo-pagato {
-    display: inline-block;
-    margin-left: 8px;
-    color: #218c2b;
-    font-weight: 800;
-    white-space: nowrap;
-  }
-  .stato-uscito {
-    display: inline-block;
-    margin-left: 8px;
-    color: #718093;
-    font-size: 14px;
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-  .asta-toast {
-    position: fixed;
-    left: 50%;
-    bottom: 22px;
-    transform: translateX(-50%);
-    z-index: 9999;
-    background: #2f3640;
-    color: white;
-    padding: 12px 16px;
-    border-radius: 10px;
-    box-shadow: 0 6px 25px rgba(0,0,0,.20);
-    font-weight: 700;
-    display: none;
-  }
-  .asta-toast.show { display: block; }
-
-  @media (max-width: 600px) {
-    .search-box { font-size: 18px; padding: 14px; }
-    .btn-ripristina,
-    .btn-annulla-acquisto {
-      margin-left: 0;
-      flex: 1;
-    }
-    .prezzo-pagato {
-      display: block;
-      margin-left: 0;
-      margin-top: 4px;
-    }
-  }
-
+body{font-family:Segoe UI,Arial,sans-serif;background:#f5f6fa;color:#2f3640;margin:0;padding:0}
+header{background:#273c75;color:#fff;padding:18px;text-align:center;font-size:25px;font-weight:700;position:sticky;top:0;z-index:10}
+.container{max-width:900px;margin:auto;padding:14px}
+.budget-total{background:#192a56;color:#fff;padding:15px;border-radius:12px;text-align:center;font-size:22px;font-weight:700;margin-bottom:12px}
+.strategy{background:#fff;border:1px solid #dcdde1;border-radius:10px;padding:12px;margin-bottom:12px;line-height:1.45}
+.strategy strong{color:#192a56}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.reset-btn,.undo-btn{border:0;border-radius:9px;padding:11px 14px;font-weight:700;cursor:pointer}
+.reset-btn{background:#c23616;color:#fff}.undo-btn{background:#718093;color:#fff}
+.reparto-header{background:#dcdde1;padding:15px;border-radius:11px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:21px;font-weight:700;position:sticky;top:61px;z-index:5}
+.reparto-header.completato{background:#44bd32;color:#fff}.reparto-crediti{font-size:22px;color:#192a56}.completato .reparto-crediti{color:#fff}
+.reparto-content{display:none;margin-bottom:20px}
+.search{width:100%;box-sizing:border-box;padding:13px;border:1px solid #bbb;border-radius:9px;font-size:17px;margin:10px 0}
+.fascia{margin-top:15px;color:#273c75}
+.player{padding:12px;margin:8px 0;background:#fff;border-radius:10px;border:1px solid #dcdde1;display:flex;gap:12px;justify-content:space-between;align-items:center;transition:.2s}
+.player.out{opacity:.35}.player-name{font-weight:700;font-size:17px}.meta{font-size:13px;color:#636e72;margin-top:3px}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.badge{font-size:12px;padding:4px 7px;border-radius:6px;background:#f1f2f6}
+.badge.base{background:#e8eaf6}.badge.range{background:#dff9fb;font-weight:700}
+.badge.max{background:#ffeaa7;font-weight:700}.badge.risk{background:#fab1a0}
+.player-buttons{display:flex;gap:6px;flex-shrink:0}
+.player-buttons button{padding:9px 10px;border:0;border-radius:8px;cursor:pointer;font-weight:700}
+.btn-uscito{background:#dcdde1;color:#2f3640}.btn-preso{background:#44bd32;color:#fff}
+.btn-undo{background:#fbc531;color:#2f3640;display:none}.player.out .btn-undo{display:block}
+.player.out .btn-uscito,.player.out .btn-preso{display:none}
+.note{font-size:13px;background:#fff;padding:10px;border-left:4px solid #273c75;border-radius:6px;margin:8px 0}
+@media(max-width:650px){.player{flex-direction:column;align-items:stretch}.player-buttons{width:100%}.player-buttons button{flex:1}.reparto-header{top:59px}}
 </style>
 
-<script>
-  let previsto = {
-    porta: 60,
-    difesa: 125,
-    centro: 180,
-    attacco: 160
-  };
-
-  let maxGiocatori = {
-    porta: 3,
-    difesa: 8,
-    centro: 8,
-    attacco: 6
-  };
-
-  let presi = {
-    porta: 0,
-    difesa: 0,
-    centro: 0,
-    attacco: 0
-  };
-
-  let res = {
-    porta: previsto.porta,
-    difesa: previsto.difesa,
-    centro: previsto.centro,
-    attacco: previsto.attacco
-  };
-
-  let resTot = 500;
-
-  function aggiornaBudget() {
-    document.getElementById("resTot").innerText = resTot;
-    document.getElementById("resPorta").innerText = res.porta;
-    document.getElementById("resDifesa").innerText = res.difesa;
-    document.getElementById("resCentro").innerText = res.centro;
-    document.getElementById("resAttacco").innerText = res.attacco;
-  }
-
-  function togglePanel(id) {
-    const panel = document.getElementById(id);
-    panel.style.display =
-      (panel.style.display === "none" || panel.style.display === "")
-        ? "block"
-        : "none";
-  }
-
-  function mostraToast(testo) {
-    let toast = document.getElementById("astaToast");
-    if (!toast) {
-      toast = document.createElement("div");
-      toast.id = "astaToast";
-      toast.className = "asta-toast";
-      document.body.appendChild(toast);
-    }
-    toast.innerText = testo;
-    toast.classList.add("show");
-    clearTimeout(window._astaToastTimer);
-    window._astaToastTimer = setTimeout(() => toast.classList.remove("show"), 1400);
-  }
-
-  function filtraGiocatori(input) {
-    const testo = input.value
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .trim();
-
-    const panel = input.closest(".reparto-content");
-    if (!panel) return;
-
-    panel.querySelectorAll(".player").forEach(player => {
-      const nome = player.querySelector(".player-name").innerText
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
-
-      player.style.display = (!testo || nome.includes(testo)) ? "" : "none";
-    });
-
-    panel.querySelectorAll("h3").forEach(heading => {
-      let next = heading.nextElementSibling;
-      let haGiocatori = false;
-
-      while (next && next.tagName !== "H3") {
-        if (
-          next.classList &&
-          next.classList.contains("player") &&
-          next.style.display !== "none"
-        ) {
-          haGiocatori = true;
-          break;
-        }
-        next = next.nextElementSibling;
-      }
-
-      heading.style.display = (!testo || haGiocatori) ? "" : "none";
-    });
-  }
-
-  /*
-   * Ricostruisce i crediti partendo dagli acquisti presenti nella pagina.
-   * Serve soprattutto per poter annullare un acquisto anche dopo il
-   * completamento di un reparto e il relativo trasferimento di residuo.
-   */
-  function ricalcolaBudget() {
-    const nuoviRes = {
-      porta: previsto.porta,
-      difesa: previsto.difesa,
-      centro: previsto.centro,
-      attacco: previsto.attacco
-    };
-
-    const nuoviPresi = {
-      porta: 0,
-      difesa: 0,
-      centro: 0,
-      attacco: 0
-    };
-
-    const ordine = ["porta", "difesa", "centro", "attacco"];
-    const pannelli = {
-      porta: "panelPorta",
-      difesa: "panelDifesa",
-      centro: "panelCentro",
-      attacco: "panelAttacco"
-    };
-
-    let totaleSpeso = 0;
-
-    ordine.forEach(reparto => {
-      const panel = document.getElementById(pannelli[reparto]);
-      let spesoReparto = 0;
-
-      if (panel) {
-        panel.querySelectorAll(".player.purchased").forEach(player => {
-          const prezzo = parseInt(player.dataset.prezzoPagato, 10) || 0;
-          spesoReparto += prezzo;
-          nuoviPresi[reparto]++;
-          totaleSpeso += prezzo;
-        });
-      }
-
-      nuoviRes[reparto] -= spesoReparto;
-
-      if (nuoviPresi[reparto] === maxGiocatori[reparto]) {
-        if (reparto === "porta") nuoviRes.difesa += nuoviRes[reparto];
-        else if (reparto === "difesa") nuoviRes.centro += nuoviRes[reparto];
-        else if (reparto === "centro") nuoviRes.attacco += nuoviRes[reparto];
-
-        nuoviRes[reparto] = 0;
-      }
-    });
-
-    res = nuoviRes;
-    presi = nuoviPresi;
-    resTot = 500 - totaleSpeso;
-
-    ordine.forEach(reparto => {
-      const header = document.getElementById("header_" + reparto);
-      if (header) {
-        header.classList.toggle(
-          "completato",
-          presi[reparto] === maxGiocatori[reparto]
-        );
-      }
-    });
-
-    aggiornaBudget();
-  }
-
-  function completaReparto(reparto) {
-    ricalcolaBudget();
-  }
-
-  function segnaUscito(el) {
-    if (el.classList.contains("purchased")) return;
-
-    el.classList.remove("out");
-    el.classList.add("exited");
-
-    const buttons = el.querySelector(".player-buttons");
-
-    if (buttons && !buttons.querySelector(".btn-ripristina")) {
-      const btn = document.createElement("button");
-      btn.className = "btn-ripristina";
-      btn.innerText = "↩ Ripristina";
-      btn.onclick = function(event) {
-        event.stopPropagation();
-        ripristinaUscito(el);
-      };
-      buttons.appendChild(btn);
-    }
-
-    const nomeEl = el.querySelector(".player-name");
-    if (nomeEl && !nomeEl.querySelector(".stato-uscito")) {
-      const stato = document.createElement("span");
-      stato.className = "stato-uscito";
-      stato.innerText = "Uscito";
-      nomeEl.appendChild(stato);
-    }
-
-    mostraToast("Giocatore segnato come uscito");
-  }
-
-  function ripristinaUscito(el) {
-    if (el.classList.contains("purchased")) return;
-
-    el.classList.remove("exited", "out");
-
-    const btn = el.querySelector(".btn-ripristina");
-    if (btn) btn.remove();
-
-    const stato = el.querySelector(".stato-uscito");
-    if (stato) stato.remove();
-
-    mostraToast("Giocatore ripristinato");
-  }
-
-  function segnaPreso(el, nome, reparto) {
-    if (el.classList.contains("purchased")) return;
-
-    let spesa = prompt("A quanti crediti hai preso " + nome + "?");
-    if (spesa === null) return;
-
-    spesa = spesa.trim();
-
-    if (spesa === "" || !/^\d+$/.test(spesa)) {
-      alert("Inserisci un numero intero di crediti valido.");
-      return;
-    }
-
-    spesa = parseInt(spesa, 10);
-
-    const nomeEl = el.querySelector(".player-name");
-
-    if (!el.dataset.nomeOriginale) {
-      el.dataset.nomeOriginale = nomeEl.innerText;
-    }
-
-    nomeEl.innerHTML = "";
-
-    const nomeSpan = document.createElement("span");
-    nomeSpan.innerText = nome;
-
-    const prezzoSpan = document.createElement("span");
-    prezzoSpan.className = "prezzo-pagato";
-    prezzoSpan.innerText = "– " + spesa + " cr.";
-
-    nomeEl.appendChild(nomeSpan);
-    nomeEl.appendChild(prezzoSpan);
-
-    el.dataset.prezzoPagato = spesa;
-    el.dataset.reparto = reparto;
-
-    el.classList.remove("exited", "out");
-
-    const stato = el.querySelector(".stato-uscito");
-    if (stato) stato.remove();
-
-    const btnRipristina = el.querySelector(".btn-ripristina");
-    if (btnRipristina) btnRipristina.remove();
-
-    el.classList.add("purchased", "out");
-
-    const buttons = el.querySelector(".player-buttons");
-
-    if (buttons && !buttons.querySelector(".btn-annulla-acquisto")) {
-      const btnAnnulla = document.createElement("button");
-      btnAnnulla.className = "btn-annulla-acquisto";
-      btnAnnulla.innerText = "↩ Annulla acquisto";
-      btnAnnulla.onclick = function(event) {
-        event.stopPropagation();
-        annullaAcquisto(el);
-      };
-      buttons.appendChild(btnAnnulla);
-    }
-
-    ricalcolaBudget();
-    mostraToast(nome + " acquistato a " + spesa + " crediti");
-  }
-
-  function annullaAcquisto(el) {
-    if (!el.classList.contains("purchased")) return;
-
-    const prezzo = el.dataset.prezzoPagato || "0";
-    const nomeOriginale = el.dataset.nomeOriginale || "Giocatore";
-
-    if (!confirm(
-      "Annullare l'acquisto di " + nomeOriginale.split(" – ")[0] +
-      " pagato " + prezzo + " crediti?"
-    )) {
-      return;
-    }
-
-    const nomeEl = el.querySelector(".player-name");
-    if (nomeEl) nomeEl.innerText = nomeOriginale;
-
-    delete el.dataset.prezzoPagato;
-    delete el.dataset.nomeOriginale;
-    delete el.dataset.reparto;
-
-    el.classList.remove("purchased", "out");
-
-    const btn = el.querySelector(".btn-annulla-acquisto");
-    if (btn) btn.remove();
-
-    ricalcolaBudget();
-    mostraToast("Acquisto annullato: puoi reinserire il prezzo");
-  }
-
-  /*
-   * Il reset resta disponibile ma richiede DUE conferme separate.
-   */
-  function resetAll() {
-    if (!confirm(
-      "ATTENZIONE!\n\n" +
-      "Stai per azzerare TUTTA l'asta.\n" +
-      "Acquisti, uscite e crediti verranno ripristinati.\n\n" +
-      "Vuoi continuare?"
-    )) return;
-
-    if (!confirm(
-      "ULTIMA CONFERMA!\n\n" +
-      "Questa operazione NON può essere annullata.\n\n" +
-      "AZZERARE DAVVERO TUTTO?"
-    )) return;
-
-    resTot = 500;
-
-    res = {
-      porta: previsto.porta,
-      difesa: previsto.difesa,
-      centro: previsto.centro,
-      attacco: previsto.attacco
-    };
-
-    presi = {
-      porta: 0,
-      difesa: 0,
-      centro: 0,
-      attacco: 0
-    };
-
-    document.querySelectorAll(".reparto-header").forEach(header => {
-      header.classList.remove("completato");
-    });
-
-    document.querySelectorAll(".player").forEach(player => {
-      const nomeEl = player.querySelector(".player-name");
-
-      if (player.dataset.nomeOriginale && nomeEl) {
-        nomeEl.innerText = player.dataset.nomeOriginale;
-      }
-
-      player.classList.remove("out", "exited", "purchased");
-
-      delete player.dataset.prezzoPagato;
-      delete player.dataset.nomeOriginale;
-      delete player.dataset.reparto;
-
-      const stato = player.querySelector(".stato-uscito");
-      if (stato) stato.remove();
-
-      const btnRipristina = player.querySelector(".btn-ripristina");
-      if (btnRipristina) btnRipristina.remove();
-
-      const btnAnnulla = player.querySelector(".btn-annulla-acquisto");
-      if (btnAnnulla) btnAnnulla.remove();
-    });
-
-    document.querySelectorAll(".search-box").forEach(input => {
-      input.value = "";
-      filtraGiocatori(input);
-    });
-
-    aggiornaBudget();
-    mostraToast("Asta completamente azzerata");
-  }
-
-  window.onload = function() {
-    aggiornaBudget();
-    document.querySelectorAll(".search-box").forEach(filtraGiocatori);
-  };
-</script>
+<style>
+.auction-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 14px}
+.credits-countdown{display:flex;align-items:baseline;gap:6px}
+.credits-label{font-size:.78rem;opacity:.75;letter-spacing:.08em}
+#creditsRemaining{font-size:2rem;line-height:1}
+.credits-total{opacity:.6}
+.control-buttons{display:flex;gap:8px}
+</style>
 
 </head>
 <body>
+<div id="auctionControls" class="auction-controls">
+  <div class="credits-countdown">
+    <span class="credits-label">CREDITI RESIDUI</span>
+    <strong id="creditsRemaining">500</strong>
+    <span class="credits-total">/ 500</span>
+  </div>
+  <div class="control-buttons">
+    <button type="button" onclick="resetAll()">RESET</button>
+    <button type="button" onclick="undoLast()">ANNULLA ULTIMO</button>
+  </div>
+</div>
 
-<header>Asta Fantacalcio - 2026/27</header>
-
+<header>⚽ Asta Fantacalcio 2026/27</header>
 <div class="container">
-
-  <div class="budget-total">
-    Crediti Totali Residui: <span id="resTot">500</span>
+  <div class="budget-total">Crediti totali residui: <span id="resTot">500</span></div>
+  
+  <div class="controls">
+    <button class="reset-btn" onclick="resetAll()">RESET COMPLETO</button>
+    <button class="undo-btn" onclick="undoLast()">ANNULLA ULTIMO ACQUISTO</button>
   </div>
-
-  <button class="reset-btn" onclick="resetAll()">RESET COMPLETO</button>
-<!-- PORTIERI -->
-<div class="reparto-header" id="header_porta" onclick="togglePanel('panelPorta')">
-  <span>Portieri (3)</span>
-  <span class="reparto-crediti" id="resPorta">60</span>
+  <div id="app"></div>
 </div>
+<script>
+const previsto={porta:60,difesa:125,centro:180,attacco:160};
+const maxGiocatori={porta:3,difesa:8,centro:8,attacco:6};
+const nomiReparto={porta:'Portieri',difesa:'Difesa',centro:'Centrocampo',attacco:'Attacco'};
+const data={"porta":[["TOP","Svilar","ROM","🟢","Titolare","G 0-1 | A 0-1",null,"48-57",57,"STIMA"],["TOP","Maignan","MIL","🟢","Titolare","G 0-1 | A 0-1",null,"38-45",45,"STIMA"],["TOP","Carnesecchi","ATA","🟢","Titolare","G 0-1 | A 0-1",null,"34-40",40,"STIMA"],["SEMI-TOP","De Gea","FIO","🟢","Titolare","G 0-1 | A 0-1",null,"16-20",20,"STIMA"],["SEMI-TOP","Mandas","LAZ","🟢","Titolare/secondo da monitorare","G 0-1 | A 0-1",null,"11-15",15,"STIMA"],["SEMI-TOP","Vicario","JUV","🟢","Titolare","G 0-1 | A 0-1",null,"11-15",15,"STIMA"],["SEMI-TOP","Meret","NAP","🟢","Titolare","G 0-1 | A 0-1",null,"10-14",14,"STIMA"],["SEMI-TOP","Martínez","INT","🟡","Gerarchia da verificare","G 0-1 | A 0-1",null,"8-12",12,"STIMA"],["VALUE","Butez","COM","🟢","Titolare","G 0-1 | A 0-1",null,"5-8",8,"STIMA"]],"difesa":[["TOP","Dimarco","INT","🟢","Titolare","G 4-8 | A 5-10",null,"72-84",92,"STIMA"],["TOP","Wesley","ROM","🟢","Titolare","G 3-7 | A 4-8",null,"68-82",90,"STIMA"],["TOP","Bremer","JUV","🟢","Titolare","G 2-5 | A 1-3",null,"58-72",80,"STIMA"],["TOP","Bisseck","INT","🟢","Titolare/rotazione","G 2-5 | A 1-3",null,"40-52",58,"STIMA"],["SEMI-TOP","Mancini","ROM","🟢","Titolare","G 2-4 | A 0-2",29,"45-58",65,"TUA"],["SEMI-TOP","Solet","UDI","🟢","Titolare","G 2-5 | A 0-2",27,"40-50",57,"TUA"],["SEMI-TOP","Rrahmani","NAP","🟢","Titolare","G 2-4 | A 0-1",28,"38-50",56,"TUA"],["SEMI-TOP","Gila","MIL","🟢","Titolare braccetto","G 2-5 | A 0-2",12,"34-44",50,"TUA"],["TITOLARE","Molina","ROM","🟢","Titolare","G 1-4 | A 1-3",20,"25-34",40,"TUA"],["TITOLARE","Miranda","BOL","🟢","Titolare","G 1-3 | A 1-3",11,"16-22",27,"TUA"],["TITOLARE","Kempf","COM","🟢","Titolare","G 1-3 | A 0-2",15,"12-18",22,"TUA"],["TITOLARE","Ostigard","GEN","🟢","Titolare","G 1-3 | A 0-1",15,"10-15",19,"TUA"],["TITOLARE","Pavlovic","MIL","🟡","Titolare/rotazione","G 1-3 | A 0-1",12,"9-14",18,"TUA"],["VALUE","Rensch","ROM","🟡","Rotazione","G 1-3 | A 1-3",10,"12-18",22,"TUA"],["VALUE","Vojvoda","UDI","🟢","Titolare","G 1-3 | A 1-3",6,"10-16",20,"TUA"],["VALUE","Kelly","JUV","🟡","Gerarchia da monitorare","G 1-3 | A 0-2",12,"9-15",20,"TUA"],["VALUE","Celik","JUV","🟢","Esterno / titolare","G 1-3 | A 1-2",null,"8-14",18,"STIMA"],["SCOMMESSA","Koulierakis","ROM","🟡","Da verificare","G 1-3 | A 0-2",8,"4-8",11,"TUA"],["SCOMMESSA","Del Prato","PAR","🟢","Titolare","G 1-2 | A 0-2",5,"4-7",9,"TUA"],["SCOMMESSA","Obrador","SAS","🟡","Da verificare","G 1-3 | A 1-2",4,"3-6",9,"TUA"],["SCOMMESSA","Comuzzo","TOR","🟢","Titolare/rotazione","G 1-2 | A 0-1",1,"3-6",8,"TUA"],["SCOMMESSA","Idzes","SAS","🟢","Titolare","G 1-2 | A 0-1",4,"3-6",8,"TUA"]],"centro":[["TOP","Nico Paz","COM","🟢","Titolare","G 8-13 | A 4-7",82,"82-92",98,"TUA"],["TOP","Orsolini","BOL","🟢","Titolare","G 8-13 | A 3-6",60,"80-90",97,"TUA"],["TOP","Çalhanoğlu","INT","🟢","Titolare","G 7-11 | A 3-6",70,"78-88",94,"TUA"],["TOP","McTominay","NAP","🟢","Titolare","G 7-12 | A 3-5",60,"78-88",94,"TUA"],["SEMI-TOP","Mastantuono","ROM","🟢","Titolare/rotazione","G 5-10 | A 2-5",40,"42-54",61,"TUA"],["SEMI-TOP","Baturina","COM","🟢","Titolare","G 5-9 | A 2-5",40,"38-50",57,"TUA"],["SEMI-TOP","Da Cunha","COM","🟢","Titolare","G 5-9 | A 3-6",40,"38-50",57,"TUA"],["SEMI-TOP","Atta","FIO","🟢","Titolare","G 4-8 | A 2-4",35,"28-38",44,"TUA"],["SEMI-TOP","Barella","INT","🟢","Titolare","G 3-6 | A 4-7",30,"28-38",44,"TUA"],["SEMI-TOP","Rabiot","MIL","🟡","Gerarchia da monitorare","G 4-7 | A 2-4",26,"24-34",40,"TUA"],["SEMI-TOP","Modric","MIL","🟡","Gerarchia da monitorare","G 2-5 | A 3-6",null,"18-28",34,"STIMA"],["TITOLARE","Vlasic","TOR","🟢","Titolare","G 4-8 | A 2-5",26,"20-29",35,"TUA"],["TITOLARE","Frattesi","LAZ","🟢","Titolare","G 5-9 | A 2-5",10,"20-28",34,"TUA"],["TITOLARE","Saelemaekers","ROM","🟢","Titolare","G 3-7 | A 3-6",18,"20-28",34,"TUA"],["TITOLARE","Ekkelenkamp","UDI","🟢","Titolare","G 3-6 | A 2-4",18,"15-22",27,"TUA"],["VALUE","Fazzini","CAG","🟢","Titolare","G 2-5 | A 1-3",10,"7-13",16,"TUA"],["VALUE","Perrone","COM","🟢","Titolare","G 2-5 | A 1-3",13,"7-12",15,"TUA"],["VALUE","Gaetano","ATA","🟡","Da verificare minutaggio","G 2-6 | A 1-4",2,"5-9",12,"TUA"],["VALUE","Zerbin","FRO","🟢","Titolare/rotazione","G 2-5 | A 2-4",4,"5-9",12,"TUA"],["SCOMMESSA","Cacciamani","TOR","🟡","Da verificare","G 1-4 | A 1-3",4,"2-5",8,"TUA"]],"attacco":[["TOP","Lautaro Martínez","INT","🟢","Titolare","G 14-20 | A 4-7",null,"82-92",100,"STIMA"],["TOP","Hojlund","NAP","🟢","Titolare","G 12-18 | A 4-7",98,"82-92",100,"TUA"],["TOP","Douvikas","COM","🟢","Titolare","G 11-16 | A 3-6",100,"82-92",100,"TUA"],["TOP","Thuram","INT","🟢","Titolare","G 12-18 | A 4-7",null,"78-90",98,"STIMA"],["SEMI-TOP","Pinamonti","LAZ","🟢","Titolare centravanti","G 10-15 | A 2-5",12,"48-60",68,"TUA"],["SEMI-TOP","Pio Esposito","INT","🟡","Rotazione possibile","G 8-13 | A 2-5",null,"40-55",64,"STIMA"],["SEMI-TOP","Simeone","TOR","🟢","Titolare","G 8-13 | A 2-4",65,"42-55",63,"TUA"],["SEMI-TOP","Scamacca","ATA","🟡","Ballottaggio","G 8-13 | A 2-4",null,"35-48",56,"STIMA"],["SEMI-TOP","De Ketelaere","ATA","🟢","Titolare/trequarti","G 6-11 | A 3-6",null,"30-42",50,"STIMA"],["SEMI-TOP","Dia","LAZ","🟡","Concorrenza","G 6-11 | A 2-5",null,"26-38",45,"STIMA"],["SEMI-TOP","Krstovic","ATA","🟡","Ballottaggio con Scamacca","G 7-12 | A 2-5",50,"28-38",44,"TUA"],["TITOLARE","Castro","BOL","🟢","Titolare","G 7-11 | A 2-4",25,"22-31",37,"TUA"],["TITOLARE","Laurienté","SAS","🟢","Titolare","G 6-10 | A 3-6",30,"20-29",35,"TUA"],["TITOLARE","Esposito","INT","🟡","Minutaggio da verificare","G 5-10 | A 2-4",30,"18-27",33,"TUA"],["TITOLARE","Neres","NAP","🟡","Rotazione","G 4-8 | A 3-6",30,"17-25",31,"TUA"],["TITOLARE","Adams","TOR","🟢","Titolare/rotazione","G 5-9 | A 2-4",20,"12-18",22,"TUA"],["VALUE","Bonny","INT","🟡","Concorrenza","G 5-9 | A 2-4",null,"10-16",20,"STIMA"],["VALUE","Piccoli","BOL","🟡","Da verificare","G 5-9 | A 1-3",null,"8-14",18,"STIMA"],["SCOMMESSA","Yeboah","VEN","🟡","Da verificare","G 4-8 | A 1-3",10,"4-8",11,"TUA"],["SCOMMESSA","Ghedjemis","FRO","🟡","Da verificare","G 3-7 | A 1-3",10,"3-6",9,"TUA"],["FUORI LISTA","Malen","ROM","⛔","Escluso per strategia lega","—",null,"—",0,""]]};let res={...previsto},presi={porta:0,difesa:0,centro:0,attacco:0},resTot=500,history=[];
+
+function render(){
+  const app=document.getElementById('app'); app.innerHTML='';
+  Object.keys(data).forEach(rep=>{
+    const h=document.createElement('div');
+    h.className='reparto-header'; h.id='header_'+rep;
+    h.onclick=()=>togglePanel(rep);
+    h.innerHTML=`<span>${nomiReparto[rep]} (${maxGiocatori[rep]})</span><span class="reparto-crediti" id="res${rep}">${res[rep]}</span>`;
+    app.appendChild(h);
+    const panel=document.createElement('div'); panel.className='reparto-content'; panel.id='panel_'+rep;
+    const input=document.createElement('input'); input.className='search';
+    input.placeholder='🔎 Cerca giocatore in '+nomiReparto[rep]+'...';
+    input.oninput=()=>filter(rep,input.value); panel.appendChild(input);
+    let last='';
+    data[rep].forEach((x,i)=>{
+      if(x[0]!==last){const fh=document.createElement('h3');fh.className='fascia';fh.textContent=x[0];panel.appendChild(fh);last=x[0]}
+      const el=document.createElement('div'); el.className='player';
+      el.dataset.name=x[1].toLowerCase(); el.dataset.rep=rep; el.id=rep+'_'+i;
+      const baseBadge=x[6]!=null ? `<span class="badge base">BASE ${x[6]}</span>` : '';
+      const rangeBadge=x[7]&&x[7]!=='—' ? `<span class="badge range">💰 RANGE ${x[7]}</span>` : '';
+      const maxBadge=x[8]!=null&&x[8]!==''&&x[8]!==0 ? `<span class="badge max">MAX ${x[8]}</span>` : '';
+      const gaBadge=x[5]&&x[5]!=='—' ? `<span class="badge">📊 ${x[5]}</span>` : '';
+      el.innerHTML=`<div>
+        <div class="player-name">${x[1]} <span>(${x[2]})</span></div>
+        <div class="meta">${x[4]}</div>
+        <div class="badges"><span class="badge">${x[3]}</span>${gaBadge}${baseBadge}${rangeBadge}${maxBadge}</div>
+      </div>
+      <div class="player-buttons">
+        <button class="btn-uscito" onclick="segnaUscito('${rep}_${i}')">Uscito</button>
+        <button class="btn-preso" onclick="segnaPreso('${rep}_${i}','${x[1].replace(/'/g,"\\'")}','${rep}')">Preso</button>
+        <button class="btn-undo" onclick="ripristina('${rep}_${i}')">Ripristina</button>
+      </div>`;
+      panel.appendChild(el);
+    });
+    app.appendChild(panel);
+  });
+  aggiornaBudget();
+}
+
+function togglePanel(rep){const p=document.getElementById('panel_'+rep);p.style.display=p.style.display==='block'?'none':'block'}
+function filter(rep,q){document.querySelectorAll('#panel_'+rep+' .player').forEach(e=>e.style.display=e.dataset.name.includes(q.toLowerCase())?'flex':'none')}
+function aggiornaBudget(){document.getElementById('resTot').textContent=resTot;Object.keys(res).forEach(r=>document.getElementById('res'+r).textContent=res[r])}
+function segnaUscito(id){document.getElementById(id).classList.add('out')}
+function segnaPreso(id,nome,rep){
+  const val=prompt('A quanti crediti hai preso '+nome+'?'); if(val===null)return;
+  const spesa=Number(val);
+  if(!Number.isInteger(spesa)||spesa<0){alert('Inserisci un numero intero valido.');return}
+  if(spesa>resTot){alert('Non hai abbastanza crediti residui.');return}
+  const el=document.getElementById(id);
+  history.push({type:'purchase',id,rep,spesa,nome,beforeRes:{...res},beforeTot:resTot,beforePresi:{...presi}});
+  resTot-=spesa; res[rep]-=spesa; presi[rep]++;
+  el.classList.add('out');
+  el.querySelector('.player-name').innerHTML=nome+' <span>('+data[rep][Number(id.split('_')[1])][2]+')</span> — <strong>preso a '+spesa+'</strong>';
+  if(presi[rep]===maxGiocatori[rep])completaReparto(rep); else aggiornaBudget();
+}
+function completaReparto(rep){
+  document.getElementById('header_'+rep).classList.add('completato');
+  const residuo=res[rep];
+  if(rep==='porta')res.difesa+=residuo;
+  else if(rep==='difesa')res.centro+=residuo;
+  else if(rep==='centro')res.attacco+=residuo;
+  res[rep]=0; aggiornaBudget();
+}
+function ripristina(id){document.getElementById(id).classList.remove('out')}
+function undoLast(){
+  const h=history.pop(); if(!h){alert('Nessun acquisto da annullare.');return}
+  res={...h.beforeRes}; resTot=h.beforeTot; presi={...h.beforePresi};
+  const el=document.getElementById(h.id); el.classList.remove('out');
+  const idx=Number(h.id.split('_')[1]);
+  el.querySelector('.player-name').innerHTML=h.nome+' <span>('+data[h.rep][idx][2]+')</span>';
+  Object.keys(presi).forEach(r=>{if(presi[r]<maxGiocatori[r])document.getElementById('header_'+r).classList.remove('completato')});
+  aggiornaBudget();
+}
+function resetAll(){
+  if(!confirm('ATTENZIONE: vuoi davvero azzerare tutta l’asta? Tutti gli acquisti, prezzi e giocatori usciti verranno ripristinati.'))return;
+  res={...previsto};presi={porta:0,difesa:0,centro:0,attacco:0};resTot=500;history=[];render();
+}
+window.onload=render;
+</script>
+
+<script>
+(function(){
+  function syncCreditsCountdown(){
+    const el = document.getElementById('creditsRemaining');
+    if(!el) return;
+    const candidates = ['crediti','credits','residui','remainingCredits','creditiResidui'];
+    for(const id of candidates){
+      const n = document.getElementById(id);
+      if(n){
+        const m = String(n.textContent).match(/-?\d+(?:[.,]\d+)?/);
+        if(m){ el.textContent = m[0].replace(',', '.'); return; }
+      }
+    }
+  }
+  window.syncCreditsCountdown = syncCreditsCountdown;
+  document.addEventListener('DOMContentLoaded', syncCreditsCountdown);
+  setInterval(syncCreditsCountdown, 250);
+})();
+</script>
+
+
+<script>
+(function(){
+  function syncCreditsCountdown(){
+    const el=document.getElementById('creditsRemaining');
+    const total=document.getElementById('resTot');
+    if(el && total) el.textContent=total.textContent;
+  }
+  window.syncCreditsCountdown=syncCreditsCountdown;
+  document.addEventListener('DOMContentLoaded',syncCreditsCountdown);
+  setInterval(syncCreditsCountdown,250);
+})();
+</script>
 
-<div class="reparto-content" id="panelPorta">
-  <input type="search" class="search-box" placeholder="🔎 Cerca portiere..." oninput="filtraGiocatori(this)" autocomplete="off">
-
-  <div class="player fascia-porta" id="carnesecchi">
-    <span class="player-name">Carnesecchi – ?</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(carnesecchi)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(carnesecchi,'Carnesecchi','porta')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-porta" id="martinez">
-    <span class="player-name">Martínez – ?</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(martinez)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(martinez,'Martínez','porta')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-porta" id="meret">
-    <span class="player-name">Meret – ?</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(meret)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(meret,'Meret','porta')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-porta" id="vicario">
-    <span class="player-name">Vicario – ?</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(vicario)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(vicario,'Vicario','porta')">Preso</button>
-    </div>
-  </div>
-
-</div>
-<!-- DIFESA -->
-<div class="reparto-header" id="header_difesa" onclick="togglePanel('panelDifesa')">
-  <span>Difesa (8)</span>
-  <span class="reparto-crediti" id="resDifesa">125</span>
-</div>
-
-<div class="reparto-content" id="panelDifesa">
-  <input type="search" class="search-box" placeholder="🔎 Cerca difensore..." oninput="filtraGiocatori(this)" autocomplete="off">
-
-  <!-- TOP -->
-  <h3 style="color:#0057ff;">Top</h3>
-
-  <div class="player fascia-top" id="mancini">
-    <span class="player-name">Mancini – 29</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(mancini)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(mancini,'Mancini','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-top" id="rrahmani">
-    <span class="player-name">Rrahmani – 28</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(rrahmani)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(rrahmani,'Rrahmani','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-top" id="solet">
-    <span class="player-name">Solet – 27</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(solet)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(solet,'Solet','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <!-- SEMI-TOP -->
-  <h3 style="color:#7a00ff;">Semi‑Top</h3>
-
-  <div class="player fascia-semitop" id="bartesaghi">
-    <span class="player-name">Bartesaghi – 17</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(bartesaghi)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(bartesaghi,'Bartesaghi','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="kalulu">
-    <span class="player-name">Kalulu – 20</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kalulu)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kalulu,'Kalulu','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="molina">
-    <span class="player-name">Molina – 20</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(molina)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(molina,'Molina','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="ndicka">
-    <span class="player-name">Ndicka – 20</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(ndicka)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(ndicka,'Ndicka','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="ramon">
-    <span class="player-name">Ramon – 18</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(ramon)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(ramon,'Ramon','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <!-- AFFIDABILI -->
-  <h3 style="color:#00a84f;">Affidabili</h3>
-
-  <div class="player fascia-affidabile" id="bastoni">
-    <span class="player-name">Bastoni – 15</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(bastoni)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(bastoni,'Bastoni','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-affidabile" id="kempf">
-    <span class="player-name">Kempf – 15</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kempf)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kempf,'Kempf','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-affidabile" id="ostigard">
-    <span class="player-name">Ostigard – 15</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(ostigard)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(ostigard,'Ostigard','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-affidabile" id="pavlovic">
-    <span class="player-name">Pavlovic – 12</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(pavlovic)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(pavlovic,'Pavlovic','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <!-- MEDI -->
-  <h3 style="color:#c7a600;">Medi</h3>
-
-  <div class="player fascia-medi" id="gila">
-    <span class="player-name">Gila – 12</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(gila)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(gila,'Gila','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="kelly">
-    <span class="player-name">Kelly – 12</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kelly)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kelly,'Kelly','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="miranda">
-    <span class="player-name">Miranda – 11</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(miranda)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(miranda,'Miranda','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="rensch">
-    <span class="player-name">Rensch – 10</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(rensch)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(rensch,'Rensch','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="vasquez">
-    <span class="player-name">Vasquez – 12</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(vasquez)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(vasquez,'Vasquez','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <!-- SCOMMESSE -->
-  <h3 style="color:#ff7b00;">Scommesse</h3>
-
-  <div class="player fascia-scommessa" id="couto">
-    <span class="player-name">Couto – 6</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(couto)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(couto,'Couto','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="hainaut">
-    <span class="player-name">Hainaut – 6</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(hainaut)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(hainaut,'Hainaut','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="haps">
-    <span class="player-name">Haps – 6</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(haps)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(haps,'Haps','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="koulierakis">
-    <span class="player-name">Koulierakis – 8</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(koulierakis)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(koulierakis,'Koulierakis','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="valdepens">
-    <span class="player-name">Valdepens – 6</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(valdepens)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(valdepens,'Valdepens','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="vojvoda">
-    <span class="player-name">Vojvoda – 6</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(vojvoda)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(vojvoda,'Vojvoda','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <!-- RISERVE -->
-  <h3 style="color:#777;">Riserve</h3>
-
-  <div class="player fascia-riserva" id="oyono">
-    <span class="player-name">A. Oyono – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(oyono)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(oyono,'A. Oyono','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="birindelli">
-    <span class="player-name">Birindelli – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(birindelli)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(birindelli,'Birindelli','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="coco">
-    <span class="player-name">Coco – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(coco)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(coco,'Coco','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="comuzzo">
-    <span class="player-name">Comuzzo – 1</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(comuzzo)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(comuzzo,'Comuzzo','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="delprato">
-    <span class="player-name">Del Prato – 5</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(delprato)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(delprato,'Del Prato','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="idzes">
-    <span class="player-name">Idzes – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(idzes)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(idzes,'Idzes','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="kaaiki">
-    <span class="player-name">Kaaiki – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kaaiki)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kaaiki,'Kaaiki','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="kabasele">
-    <span class="player-name">Kabasele – 5</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kabasele)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kabasele,'Kabasele','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="kouadio">
-    <span class="player-name">Kouadio – 1</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kouadio)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kouadio,'Kouadio','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="marcandalli">
-    <span class="player-name">Marcandalli – 1</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(marcandalli)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(marcandalli,'Marcandalli','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="mina">
-    <span class="player-name">Mina – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(mina)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(mina,'Mina','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="obrador">
-    <span class="player-name">Obrador – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(obrador)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(obrador,'Obrador','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="provstgard">
-    <span class="player-name">Provstgard – 1</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(provstgard)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(provstgard,'Provstgard','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="siebert">
-    <span class="player-name">Siebert – 1</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(siebert)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(siebert,'Siebert','difesa')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="valeri">
-    <span class="player-name">Valeri – 3</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(valeri)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(valeri,'Valeri','difesa')">Preso</button>
-    </div>
-  </div>
-
-</div> <!-- CHIUSURA PANEL DIFESA -->
-
-<!-- CENTROCAMPO -->
-<div class="reparto-header" id="header_centro" onclick="togglePanel('panelCentro')">
-  <span>Centrocampo (8)</span>
-  <span class="reparto-crediti" id="resCentro">180</span>
-</div>
-
-<div class="reparto-content" id="panelCentro">
-  <input type="search" class="search-box" placeholder="🔎 Cerca centrocampista..." oninput="filtraGiocatori(this)" autocomplete="off">
-
-  <!-- TOP ASSOLUTI -->
-  <h3 style="color:#0057ff;">Top Assoluti</h3>
-
-  <div class="player fascia-topassoluto" id="chalanoglu">
-    <span class="player-name">Chalanoglu – 70</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(chalanoglu)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(chalanoglu,'Chalanoglu','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-topassoluto" id="mctommy">
-    <span class="player-name">McTommy – 60</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(mctommy)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(mctommy,'McTommy','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-topassoluto" id="orsolini">
-    <span class="player-name">Orsolini – 60</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(orsolini)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(orsolini,'Orsolini','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-topassoluto" id="paz">
-    <span class="player-name">Paz – 82</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(paz)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(paz,'Paz','centro')">Preso</button>
-    </div>
-  </div>
-
-  <!-- TOP -->
-  <h3 style="color:#7a00ff;">Top</h3>
-
-  <div class="player fascia-top" id="baturina">
-    <span class="player-name">Baturina – 40</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(baturina)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(baturina,'Baturina','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-top" id="dacunha">
-    <span class="player-name">Da Cunha – 40</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(dacunha)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(dacunha,'Da Cunha','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-top" id="mastantuono">
-    <span class="player-name">Mastantuono – 40</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(mastantuono)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(mastantuono,'Mastantuono','centro')">Preso</button>
-    </div>
-  </div>
-
-  <!-- SEMI-TOP -->
-  <h3 style="color:#00a84f;">Semi‑Top</h3>
-
-  <div class="player fascia-semitop" id="atta">
-    <span class="player-name">Atta – 35</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(atta)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(atta,'Atta','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="barella">
-    <span class="player-name">Barella – 30</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(barella)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(barella,'Barella','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="conceicao">
-    <span class="player-name">Conceicao – 25</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(conceicao)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(conceicao,'Conceicao','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="jrodriguez">
-    <span class="player-name">J. Rodriguez – 24</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(jrodriguez)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(jrodriguez,'J. Rodriguez','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="rabiot">
-    <span class="player-name">Rabiot – 26</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(rabiot)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(rabiot,'Rabiot','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="rowe">
-    <span class="player-name">Rowe – 30</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(rowe)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(rowe,'Rowe','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-semitop" id="vlasic">
-    <span class="player-name">Vlasic – 26</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(vlasic)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(vlasic,'Vlasic','centro')">Preso</button>
-    </div>
-  </div>
-
-  <!-- TITOLARI FORTI -->
-  <h3 style="color:#ff7b00;">Titolari Forti</h3>
-
-  <div class="player fascia-forte" id="diouf">
-    <span class="player-name">Diouf – 19</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(diouf)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(diouf,'Diouf','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-forte" id="ekkelenkamp">
-    <span class="player-name">Ekkelenkamp – 18</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(ekkelenkamp)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(ekkelenkamp,'Ekkelenkamp','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-forte" id="saelemaekers">
-    <span class="player-name">Saelemaekers – 18</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(saelemaekers)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(saelemaekers,'Saelemaekers','centro')">Preso</button>
-    </div>
-  </div>
-
-  <!-- TITOLARI MEDI -->
-  <h3 style="color:#c7a600;">Titolari Medi</h3>
-
-  <div class="player fascia-medi" id="calo">
-    <span class="player-name">Calò – 12</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(calo)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(calo,'Calò','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="fazzini">
-    <span class="player-name">Fazzini – 10</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(fazzini)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(fazzini,'Fazzini','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="frattesi">
-    <span class="player-name">Frattesi – 10</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(frattesi)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(frattesi,'Frattesi','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="pavlovic_c">
-    <span class="player-name">Pavlovic – 12</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(pavlovic_c)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(pavlovic_c,'Pavlovic','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="perrone">
-    <span class="player-name">Perrone – 13</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(perrone)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(perrone,'Perrone','centro')">Preso</button>
-    </div>
-  </div>
-
-  <!-- SCOMMESSE -->
-  <h3 style="color:#d12b00;">Scommesse</h3>
-
-  <div class="player fascia-scommessa" id="adzin">
-    <span class="player-name">Adzin – 3</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(adzin)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(adzin,'Adzin','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="cacciamani">
-    <span class="player-name">Cacciamani – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(cacciamani)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(cacciamani,'Cacciamani','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="cisse">
-    <span class="player-name">Cisse – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(cisse)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(cisse,'Cisse','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="coulibaly">
-    <span class="player-name">Coulibaly – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(coulibaly)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(coulibaly,'Coulibaly','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="kulenovic_c">
-    <span class="player-name">Kulenovic – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kulenovic_c)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kulenovic_c,'Kulenovic','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="romano">
-    <span class="player-name">Romano – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(romano)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(romano,'Romano','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="zerbin_c">
-    <span class="player-name">Zerbin – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(zerbin_c)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(zerbin_c,'Zerbin','centro')">Preso</button>
-    </div>
-  </div>
-
-  <!-- RISERVE -->
-  <h3 style="color:#777;">Riserve</h3>
-
-  <div class="player fascia-riserva" id="bakola">
-    <span class="player-name">Bakola – 1</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(bakola)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(bakola,'Bakola','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="frendrup">
-    <span class="player-name">Frendrup – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(frendrup)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(frendrup,'Frendrup','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="gaetano">
-    <span class="player-name">Gaetano – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(gaetano)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(gaetano,'Gaetano','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="karlstrom">
-    <span class="player-name">Karlstrom – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(karlstrom)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(karlstrom,'Karlstrom','centro')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="oulai">
-    <span class="player-name">Oulai – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(oulai)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(oulai,'Oulai','centro')">Preso</button>
-    </div>
-  </div>
-
-</div> <!-- CHIUSURA PANEL CENTROCAMPO -->
-
-<!-- ATTACCO -->
-<div class="reparto-header" id="header_attacco" onclick="togglePanel('panelAttacco')">
-  <span>Attacco (6)</span>
-  <span class="reparto-crediti" id="resAttacco">160</span>
-</div>
-
-<div class="reparto-content" id="panelAttacco">
-  <input type="search" class="search-box" placeholder="🔎 Cerca attaccante..." oninput="filtraGiocatori(this)" autocomplete="off">
-
-  <!-- TOP -->
-  <h3 style="color:#0057ff;">Top</h3>
-
-  <div class="player fascia-top" id="douvikas">
-    <span class="player-name">Douvikas – 100</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(douvikas)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(douvikas,'Douvikas','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-top" id="hojlund">
-    <span class="player-name">Hojlund – 98</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(hojlund)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(hojlund,'Hojlund','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-top" id="kristovic">
-    <span class="player-name">Kristovic – 50</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kristovic)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kristovic,'Kristovic','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-top" id="simeone">
-    <span class="player-name">Simeone – 65</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(simeone)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(simeone,'Simeone','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <!-- TITOLARI FORTI -->
-  <h3 style="color:#7a00ff;">Titolari Forti</h3>
-
-  <div class="player fascia-forte" id="asantos">
-    <span class="player-name">A. Santos – 40</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(asantos)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(asantos,'A. Santos','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-forte" id="castro">
-    <span class="player-name">Castro – 25</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(castro)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(castro,'Castro','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-forte" id="colombo">
-    <span class="player-name">Colombo – 30</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(colombo)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(colombo,'Colombo','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-forte" id="esposito">
-    <span class="player-name">Esposito – 30</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(esposito)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(esposito,'Esposito','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-forte" id="lauriente">
-    <span class="player-name">Laurienté – 30</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(lauriente)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(lauriente,'Laurienté','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-forte" id="neres">
-    <span class="player-name">Neres – 30</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(neres)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(neres,'Neres','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-forte" id="pellegrino">
-    <span class="player-name">Pellegrino – 35</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(pellegrino)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(pellegrino,'Pellegrino','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <!-- TITOLARI MEDI -->
-  <h3 style="color:#00a84f;">Titolari Medi</h3>
-
-  <div class="player fascia-medi" id="adams">
-    <span class="player-name">Adams – 20</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(adams)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(adams,'Adams','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-medi" id="pinamonti">
-    <span class="player-name">Pinamonti – 12</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(pinamonti)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(pinamonti,'Pinamonti','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <!-- SCOMMESSE -->
-  <h3 style="color:#ff7b00;">Scommesse</h3>
-
-  <div class="player fascia-scommessa" id="ghedjemis">
-    <span class="player-name">Ghedjemis – 10</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(ghedjemis)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(ghedjemis,'Ghedjemis','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="maldini">
-    <span class="player-name">Maldini – 8</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(maldini)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(maldini,'Maldini','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-scommessa" id="yeboah">
-    <span class="player-name">Yeboah – 10</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(yeboah)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(yeboah,'Yeboah','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <!-- RISERVE -->
-  <h3 style="color:#777;">Riserve</h3>
-
-  <div class="player fascia-riserva" id="adzin_a">
-    <span class="player-name">Adzin – 3</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(adzin_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(adzin_a,'Adzin','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="bakola_a">
-    <span class="player-name">Bakola – 1</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(bakola_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(bakola_a,'Bakola','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="cacciamani_a">
-    <span class="player-name">Cacciamani – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(cacciamani_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(cacciamani_a,'Cacciamani','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="cheadams">
-    <span class="player-name">Che Adams – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(cheadams)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(cheadams,'Che Adams','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="cisse_a">
-    <span class="player-name">Cisse – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(cisse_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(cisse_a,'Cisse','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="coulibaly_a">
-    <span class="player-name">Coulibaly – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(coulibaly_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(coulibaly_a,'Coulibaly','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="frendrup_a">
-    <span class="player-name">Frendrup – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(frendrup_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(frendrup_a,'Frendrup','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="gaetano_a">
-    <span class="player-name">Gaetano – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(gaetano_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(gaetano_a,'Gaetano','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="karlstrom_a">
-    <span class="player-name">Karlstrom – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(karlstrom_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(karlstrom_a,'Karlstrom','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="kulenovic_a">
-    <span class="player-name">Kulenovic – 1</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(kulenovic_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(kulenovic_a,'Kulenovic','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="oulai_a">
-    <span class="player-name">Oulai – 2</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(oulai_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(oulai_a,'Oulai','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="romano_a">
-    <span class="player-name">Romano – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(romano_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(romano_a,'Romano','attacco')">Preso</button>
-    </div>
-  </div>
-
-  <div class="player fascia-riserva" id="zerbin_a">
-    <span class="player-name">Zerbin – 4</span>
-    <div class="player-buttons">
-      <button class="btn-uscito" onclick="segnaUscito(zerbin_a)">Uscito</button>
-      <button class="btn-preso" onclick="segnaPreso(zerbin_a,'Zerbin','attacco')">Preso</button>
-    </div>
-  </div>
-
-</div> <!-- CHIUSURA PANEL ATTACCO -->
-
-</div>
 </body>
 </html>
